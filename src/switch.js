@@ -44,12 +44,10 @@ export default class Switch extends React.Component {
         if (hash.charAt(0) !== '!') {
             return;
         }
-
         let path = hash.substring(1);
         if (this.props.debug === true) {
             console.debug("New path: " + path);
         }
-
         return this.setState({path: path});
     }
 
