@@ -1,5 +1,10 @@
 import React from "react";
 
+//Unescape a character
+let unescape = function (str) {
+    return decodeURIComponent(str.replace(/\+/g, " "));
+};
+
 //Parse a path
 let parsePath = function (str) {
     let items = str.trim().split("/");
@@ -15,15 +20,36 @@ let parsePath = function (str) {
 
 //Parse a query-string
 let parseQueryString = function (str) {
-    return {};
+    if (typeof str !== 'string'){ return {}; }
+    //Initialize the output query object
+    let query = {};
+    str.trim().split("&").forEach(function (item) {
+        //Check for empty string
+        if (item.trim() === "") {
+            return {}; 
+        }
+        let items = item.trim().split("=");
+        let itemKey = unescape(items[0]);
+        let itemValue = (typeof items[1] === "string") ? unescape(items[1]) : "";
+        //Check if value exists
+        if (typeof query[itemKey] !== "undefined") {
+            if (Array.isArray(query[itemKey]) === false) {
+                query[itemKey] = [ query[itemKey] ];
+            }
+            query[itemKey].push(itemValue);
+        }
+        else {
+            query[itemKey] = itemValue;
+        }
+    });
+    return query;
 };
-
 
 //Switch class
 export default class Switch extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {path: null};
+        this.state = {path: null, pathname: null, query: {}};
         this.refresh = this.refresh.bind(this);
     }
 
@@ -38,17 +64,27 @@ export default class Switch extends React.Component {
 
     refresh() {
         let hash = window.decodeURIComponent(window.location.hash.substring(1));
-        if (hash.trim() === '') {
-            hash = '!/';
+        if (hash.trim() === "") {
+            hash = "!/";
         }
-        if (hash.charAt(0) !== '!') {
+        if (hash.charAt(0) !== "!") {
             return;
         }
         let path = hash.substring(1);
+        let pathname = path;
+        let query = {};
+        //Check for query string values 
+        let queryIndex = path.indexOf("?");
+        if (queryIndex !== -1) {
+            //Parse the query string values
+            query = parseQueryString(pathname.substring(queryIndex + 1));
+            //Update the pathname 
+            pathname = pathname.slice(0, queryIndex);
+        }
         if (this.props.debug === true) {
             console.debug("New path: " + path);
         }
-        return this.setState({path: path});
+        return this.setState({path: path, pathname: pathname, query: query});
     }
 
     render() {
@@ -56,12 +92,18 @@ export default class Switch extends React.Component {
         if (this.state.path === null) {
             return React.createElement("div", {});
         }
-
         let self = this;
         let element = React.createElement("span", {}, "Not found"); //Default output element
         let foundPath = false;
-        let request = {path: this.state.path, params: {}, query: {}};
-        let pathItems = parsePath(this.state.path);
+        //Initialize the request object
+        let request = {
+            path: this.state.path + "",
+            pathname: this.state.pathname + "", 
+            params: {}, 
+            query: Object.assign({}, this.state.query)
+        };
+        //Split the string path
+        let pathItems = parsePath(request.pathname);
 
         React.Children.forEach(this.props.children, function (child) {
             //Check if path has been found
