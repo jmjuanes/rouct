@@ -1,5 +1,24 @@
 import React from "react";
 
+//Parse a path
+let parsePath = function (str) {
+    let items = str.trim().split("/");
+    if (items[0].trim().length === 0) {
+        items.shift();
+    }
+    if (items[items.length - 1].trim().length === 0) {
+        items.pop();
+    }
+    //items.map(function(item){ return item.trim(); });
+    return items;
+};
+
+//Parse a query-string
+let parseQueryString = function (str) {
+    return {};
+};
+
+
 //Switch class
 export default class Switch extends React.Component {
     constructor(props) {
@@ -13,7 +32,6 @@ export default class Switch extends React.Component {
         window.addEventListener("hashchange", function () {
             return self.refresh();
         }, false);
-
         //Reload the router
         return this.refresh();
     }
@@ -35,18 +53,6 @@ export default class Switch extends React.Component {
         return this.setState({path: path});
     }
 
-    parsePath(str) {
-        let items = str.trim().split('/');
-        if (items[0].trim().length === 0) {
-            items.shift();
-        }
-        if (items[items.length - 1].trim().length === 0) {
-            items.pop();
-        }
-        //items.map(function(item){ return item.trim(); });
-        return items;
-    }
-
     render() {
         //Check for no path
         if (this.state.path === null) {
@@ -57,7 +63,7 @@ export default class Switch extends React.Component {
         let element = React.createElement("span", {}, "Not found"); //Default output element
         let foundPath = false;
         let request = {path: this.state.path, params: {}, query: {}};
-        let pathItems = this.parsePath(this.state.path);
+        let pathItems = parsePath(this.state.path);
 
         React.Children.forEach(this.props.children, function (child) {
             //Check if path has been found
@@ -74,7 +80,7 @@ export default class Switch extends React.Component {
             }
 
             //let childProps = child.props.props;
-            let childItems = self.parsePath(child.props.path);
+            let childItems = parsePath(child.props.path);
             if (childItems.length === pathItems.length) {
                 for (let i = 0; i < childItems.length; i++) {
                     if (childItems[i].charAt(0) === ":") {
