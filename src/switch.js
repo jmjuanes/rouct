@@ -68,17 +68,14 @@ export default class Switch extends React.Component {
         React.Children.forEach(this.props.children, function (child) {
             //Check if path has been found
             if (foundPath === true) return;
-
             //Reset the params field
             request.params = {};
-
             //Check for catch-all path
             if (child.props.path === "*") {
                 let props = Object.assign({request: request}, child.props.props);
                 element = React.createElement(child.props.component, props);
                 foundPath = true;
             }
-
             //let childProps = child.props.props;
             let childItems = parsePath(child.props.path);
             if (childItems.length === pathItems.length) {
@@ -97,7 +94,6 @@ export default class Switch extends React.Component {
                 foundPath = true;
             }
         });
-
         return element;
     }
 }
