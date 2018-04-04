@@ -2,6 +2,8 @@
 
 > Micro router for React.
 
+**NOTE**: this package is on development.  
+
 ## Installation 
 
 Use `npm` to install the package:
