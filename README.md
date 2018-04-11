@@ -90,6 +90,17 @@ A component that renders the first child `Router.Route` that matches the current
 
 ### Router.Route
 
+A React component that is used to assign a path to a component that should be rendered if the current path matches the route path.
+
+```javascript
+<Router.Switch>
+    <Router.Route exact path="/" component={HomePage}/>
+    <Router.Route exact path="/about" component={AboutPage}/>
+    <Router.Route exact path="/portfolio" component={PortfolioPage}/>
+</Router.Switch>
+```
+
+> **Importante node**: The `Router.Route` component should always be used inside a `Router.Switch` component. Otherwise it will render nothing.
 
 The `Router.Route` component expects the following props:
 
@@ -97,7 +108,24 @@ The `Router.Route` component expects the following props:
 
 A `string` that describes the pathname that the route matches. When the current location matches the route's path, the component specified by the `component` prop is rendered.
 
+```javascript
+<Router.Route path="/about/contact" component={ContactPage}/>
+```
+
 The `path` can also be a dynamic path string, using named parameters prefixed by a colon to the parameter name. For example, the path `/user/:name` matches `/user/bob` and `user/susan`. The captured values are stored in the `request.params` object passed as a property to the rendered component.
+
+```javascript
+<Router.Route path="/user/:name" component={UserManagement}/>
+```
+
+You can also create a catch-all route setting the `path` value to `*`:
+
+```javascript
+<Router.Route path="*" component={NotFoundPage}/>
+``` 
+
+> **Important note**: query strings are not part of the route path.
+ 
 
 ##### `component`
 
