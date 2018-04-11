@@ -36,7 +36,7 @@ import * as Router from "neutrine-router";
 
 Create a class that extends `Router.App`. This class will call automatically the `render()` method when the `hash` segment of your url changes.
 
-```javascript
+```jsx
 class MyApp extends Router.App {
     
 }
@@ -44,7 +44,7 @@ class MyApp extends Router.App {
 
 Implement the `render()` method in your new class. Use the `Router.Switch` component to find the route that matches the current location, and the `Router.Route` component to define which componet will be rendered when the current location matches the route's path. 
 
-```javascript
+```jsx
 class MyApp extends Router.App {
     render() {
         return (
@@ -58,7 +58,7 @@ class MyApp extends Router.App {
 
 Now implement your `HomePage` component that will be rendered when the user navigates to the root of your website:
 
-```javascript
+```jsx
 class HomePage extends React.Component {
     render() {
         return <div>Hello world!</div>
@@ -73,9 +73,7 @@ class HomePage extends React.Component {
 
 `Router.App` is an abstract class that extends `React.Component`, but with the addition that the `render()` method will be called when the *hash* string of your site changes.
 
-```javascript
-import * as Router from "neutrine-Router";
-
+```jsx
 class App extends Router.App {
     render() {
         //Here goes your content
@@ -87,7 +85,7 @@ class App extends Router.App {
 
 A component that renders the first child `Router.Route` that matches the current location. 
 
-```javascript
+```jsx
 <Router.Switch>
     /* Insert here your routes */
 </Router.Switch>
@@ -97,7 +95,7 @@ A component that renders the first child `Router.Route` that matches the current
 
 A React component that is used to assign a path to a component that should be rendered if the current path matches the route path.
 
-```javascript
+```jsx
 <Router.Switch>
     <Router.Route exact path="/" component={HomePage}/>
     <Router.Route exact path="/about" component={AboutPage}/>
@@ -113,19 +111,19 @@ The `Router.Route` component expects the following props:
 
 A `string` that describes the pathname that the route matches. When the current location matches the route's path, the component specified by the `component` prop is rendered.
 
-```javascript
+```jsx
 <Router.Route path="/about/contact" component={ContactPage}/>
 ```
 
 The `path` can also be a dynamic path string, using named parameters prefixed by a colon to the parameter name. For example, the path `/user/:name` matches `/user/bob` and `user/susan`. The captured values are stored in the `request.params` object passed as a property to the rendered component.
 
-```javascript
+```jsx
 <Router.Route path="/user/:name" component={UserManagement}/>
 ```
 
 You can also create a catch-all route setting the `path` value to `*`:
 
-```javascript
+```jsx
 <Router.Route path="*" component={NotFoundPage}/>
 ``` 
 
@@ -163,7 +161,7 @@ A React component that should be rendered when the route matches. This component
 
 Use this function to change the hash segment with the provided path. This function also adds the exclamation mark to the path after the hash.  
 
-```javascript
+```jsx
 class Menu extends React.Component {
     render() {
         return (
