@@ -11,7 +11,7 @@
 
 `neutrine-router` is a micro-router component for building Single Page Applications (SPA) with React. 
 
-It uses the **hashbang** as the routing strategy. This strategy uses an exclamation mark after the hash to indicate that the hash is used for routing. A tipically url with a *hashbang* looks like: 
+It uses the **hashbang** as the routing strategy. This strategy adds an exclamation mark after the hash to indicate that the hash is used for routing. A tipically url with a *hashbang* looks like: 
 
 ```
 http://example.com/#!/about/contact
@@ -87,6 +87,11 @@ class App extends Router.App {
 
 A component that renders the first child `Router.Route` that matches the current location. 
 
+```javascript
+<Router.Switch>
+    /* Insert here your routes */
+</Router.Switch>
+```
 
 ### Router.Route
 
@@ -152,6 +157,25 @@ A React component that should be rendered when the route matches. This component
 | `/one/`       | `/one/two`   | No               | Yes      |
 | `/one/two`    | `/one/two`   | Yes              | Yes      |
 | `/one/two`    | `/one/two`   | No               | Yes      |
+
+
+### Router.redirect(url)
+
+Use this function to change the hash segment with the provided path. This function also adds the exclamation mark to the path after the hash.  
+
+```javascript
+class Menu extends React.Component {
+    render() {
+        return (
+            <div className="menu">
+                <a className="menu-link" onClick={() => Router.redirect("/");}>Home</a>
+                <a className="menu-link" onClick={() => Router.redirect("/about");}>About</a>
+                <a className="menu-link" onClick={() => Router.redirect("/portfolio");}>Portfolio</a>
+            </div>
+        );
+    }
+}
+```
 
 
 ## License
