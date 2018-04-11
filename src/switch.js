@@ -83,7 +83,9 @@ export default class Switch extends React.Component {
         //Iterate over all routes
         React.Children.forEach(this.props.children, function (child) {
             //Check if path has been found
-            if (foundPath === true) return;
+            if (foundPath === true) {
+                return;
+            }
             //Reset the params field
             request.params = {};
             //Check for catch-all path
@@ -92,23 +94,29 @@ export default class Switch extends React.Component {
                 element = React.createElement(child.props.component, props);
                 foundPath = true;
             }
-            //let childProps = child.props.props;
+            //Check if we want an exact path
+            let exactPath = (typeof child.props.exact === "boolean") ? child.props.exact : false;
             let childItems = parsePath(child.props.path);
-            if (childItems.length === pathItems.length) {
-                for (let i = 0; i < childItems.length; i++) {
-                    if (childItems[i].charAt(0) === ":") {
-                        let paramKey = childItems[i].substring(1);
-                        //let paramValue = pathItems[i];
-                        request.params[paramKey] = pathItems[i];
-                    }
-                    else if (childItems[i] !== pathItems[i]) {
-                        return;
-                    }
-                }
-                let props = Object.assign({request: request}, child.props.props);
-                element = React.createElement(child.props.component, props);
-                foundPath = true;
+            //Check the number of path items
+            if (exactPath === true && (childItems.length !== pathItems.length)) {
+                //Path not valid
+                return;
             }
+            //Check all path items
+            for (let i = 0; i < childItems.length; i++) {
+                if (childItems[i].charAt(0) === ":") {
+                    let paramKey = childItems[i].substring(1);
+                    //let paramValue = pathItems[i];
+                    request.params[paramKey] = pathItems[i];
+                }
+                else if (childItems[i] !== pathItems[i]) {
+                    return;
+                }
+            }
+            //Clone the new element props
+            let props = Object.assign({request: request}, child.props.props);
+            element = React.createElement(child.props.component, props);
+            foundPath = true;
         });
         return element;
     }
