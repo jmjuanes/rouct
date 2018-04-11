@@ -115,4 +115,7 @@ export default class Switch extends React.Component {
 }
 
 //Switch default props
-Switch.defaultProps = {debug: false};
+Switch.defaultProps = {
+    debug: false
+};
+
