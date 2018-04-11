@@ -49,7 +49,7 @@ class MyApp extends Router.App {
     render() {
         return (
             <Router.Switch>
-                <Router.Route exact path="/" component={HomePage}>
+                <Router.Route exact path="/" component={HomePage}/>
             </Router.Switch>
         );
     }
