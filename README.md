@@ -41,7 +41,7 @@ import * as Router from "neutrine-router";
 
 ### Router.App
 
-`Router.App` is an abstract class that extends `React.Component`, but with the difference that the `render` method will be callend when the hashbang of your site changes..
+`Router.App` is an abstract class that extends `React.Component`, with the addition that the `render()` method will be called when the *hash* string of your site changes.
 
 ```javascript
 import * as Router from "neutrine-Router";
