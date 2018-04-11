@@ -34,7 +34,7 @@ Import `neutrine-router` in your ES6 module:
 import * as Router from "neutrine-router";
 ```
 
-Create a class that extends `Router.App`. This class will call automatically the `render()` method when the `hash` portion of your url changes.
+Create a class that extends `Router.App`. This class will call automatically the `render()` method when the `hash` segment of your url changes.
 
 ```javascript
 class MyApp extends Router.App {
@@ -71,7 +71,7 @@ class HomePage extends React.Component {
 
 ### Router.App
 
-`Router.App` is an abstract class that extends `React.Component`, with the addition that the `render()` method will be called when the *hash* string of your site changes.
+`Router.App` is an abstract class that extends `React.Component`, but with the addition that the `render()` method will be called when the *hash* string of your site changes.
 
 ```javascript
 import * as Router from "neutrine-Router";
@@ -100,7 +100,7 @@ A React component that is used to assign a path to a component that should be re
 </Router.Switch>
 ```
 
-> **Importante node**: The `Router.Route` component should always be used inside a `Router.Switch` component. Otherwise it will render nothing.
+> **Important note**: The `Router.Route` component should always be used inside a `Router.Switch` component. Otherwise it will render nothing.
 
 The `Router.Route` component expects the following props:
 
