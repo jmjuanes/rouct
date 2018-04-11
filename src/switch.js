@@ -47,64 +47,40 @@ let parseQueryString = function (str) {
 
 //Switch class
 export default class Switch extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {path: null, pathname: null, query: {}};
-        this.refresh = this.refresh.bind(this);
-    }
-
-    componentDidMount() {
+    render() {
         let self = this;
-        window.addEventListener("hashchange", function () {
-            return self.refresh();
-        }, false);
-        //Reload the router
-        return this.refresh();
-    }
-
-    refresh() {
+        let element = React.createElement("span", {}, "Not found");
+        let foundPath = false;
+        //Get the hash
         let hash = window.decodeURIComponent(window.location.hash.substring(1));
         if (hash.trim() === "") {
             hash = "!/";
         }
         if (hash.charAt(0) !== "!") {
-            return;
+            //No valid hashbang url
+            return element;
         }
-        let path = hash.substring(1);
-        let pathname = path;
-        let query = {};
-        //Check for query string values 
-        let queryIndex = path.indexOf("?");
-        if (queryIndex !== -1) {
-            //Parse the query string values
-            query = parseQueryString(pathname.substring(queryIndex + 1));
-            //Update the pathname 
-            pathname = pathname.slice(0, queryIndex);
-        }
-        if (this.props.debug === true) {
-            console.debug("New path: " + path);
-        }
-        return this.setState({path: path, pathname: pathname, query: query});
-    }
-
-    render() {
-        //Check for no path
-        if (this.state.path === null) {
-            return React.createElement("div", {});
-        }
-        let self = this;
-        let element = React.createElement("span", {}, "Not found"); //Default output element
-        let foundPath = false;
         //Initialize the request object
         let request = {
-            path: this.state.path + "",
-            pathname: this.state.pathname + "", 
+            path: hash.substring(1),
+            pathname: hash.substring(1), 
             params: {}, 
-            query: Object.assign({}, this.state.query)
+            query: {}
         };
+        //Check for query string values 
+        let queryIndex = request.path.indexOf("?");
+        if (queryIndex !== -1) {
+            //Parse the query string values
+            request.query = parseQueryString(request.path.substring(queryIndex + 1));
+            //Update the pathname 
+            request.pathname = request.path.slice(0, queryIndex);
+        }
+        if (this.props.debug === true) {
+            console.debug("New path: " + request.path);
+        }
         //Split the string path
         let pathItems = parsePath(request.pathname);
-
+        //Iterate over all routes
         React.Children.forEach(this.props.children, function (child) {
             //Check if path has been found
             if (foundPath === true) return;
