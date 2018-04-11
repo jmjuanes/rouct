@@ -11,7 +11,7 @@
 
 `neutrine-router` is a micro-router component for building Single Page Applications (SPA) with React. 
 
-`neutrine-router` uses the **hashbang** as the routing strategy. This strategy uses an exclamation mark after the hash to indicate that the hash is used for routing. A tipically url with a *hashbang* looks like: 
+It uses the **hashbang** as the routing strategy. This strategy uses an exclamation mark after the hash to indicate that the hash is used for routing. A tipically url with a *hashbang* looks like: 
 
 ```
 http://example.com/#!/about/contact
