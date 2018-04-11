@@ -26,7 +26,7 @@ Use `npm` to install the package:
 $ npm install --save neutrine-router
 ```
 
-## Simple usage
+## Example 
 
 Import `neutrine-router` in your ES6 module:
 
