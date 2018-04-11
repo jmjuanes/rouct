@@ -11,6 +11,7 @@ export default class Route extends React.Component {
 Route.defaultProps = {
     path: "*", 
     component: null, 
-    props: {}
+    props: {},
+    exact: false
 };
 
