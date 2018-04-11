@@ -26,18 +26,48 @@ Use `npm` to install the package:
 $ npm install --save neutrine-router
 ```
 
-## Usage
+## Simple usage
 
-
- 
-
-## API 
-
-Import in your ES6 module:
+Import `neutrine-router` in your ES6 module:
 
 ```javascript
 import * as Router from "neutrine-router";
 ```
+
+Create a class that extends `Router.App`. This class will call automatically the `render()` method when the `hash` portion of your url changes.
+
+```javascript
+class MyApp extends Router.App {
+    
+}
+```
+
+Implement the `render()` method in your new class. Use the `Router.Switch` component to find the route that matches the current location, and the `Router.Route` component to define which componet will be rendered when the current location matches the route's path. 
+
+```javascript
+class MyApp extends Router.App {
+    render() {
+        return (
+            <Router.Switch>
+                <Router.Route exact path="/" component={HomePage}>
+            </Router.Switch>
+        );
+    }
+}
+``` 
+
+Now implement your `HomePage` component that will be rendered when the user navigates to the root of your website:
+
+```javascript
+class HomePage extends React.Component {
+    render() {
+        return <div>Hello world!</div>
+    }
+}
+```
+
+
+## API 
 
 ### Router.App
 
@@ -55,7 +85,38 @@ class App extends Router.App {
 
 ### Router.Switch
 
-A component that renders the first child `Route` that matches the current 
+A component that renders the first child `Router.Route` that matches the current location. 
+
+
+### Router.Route
+
+
+The `Router.Route` component expects the following props:
+
+##### `path`
+
+A `string` that describes the pathname that the route matches. When the current location matches the route's path, the component specified by the `component` prop is rendered.
+
+The `path` can also be a dynamic path string, using named parameters prefixed by a colon to the parameter name. For example, the path `/user/:name` matches `/user/bob` and `user/susan`. The captured values are stored in the `request.params` object passed as a property to the rendered component.
+
+##### `component`
+
+A React component that should be rendered when the route matches. This component will be called with the props passed from the `props` property of the Route. Also, a `request` object will be passed as a prop with the following entries: 
+
+- `path`: a `string` with the full matched path.
+- `pathname`: a `string` with the part of the URL before the start of the `query`.
+- `query`: an `object` that contains all query-string parameters in the matched path. Default is an empty object `{}`.
+- `params`: an `object` that contains all parsed properties extracted from the dynamic parts of the path. Default is an empty object `{}`.
+
+##### `props`
+
+**Optionally** An `object` with the extra props that should be passed to the rendered `component` when the route matches.
+
+##### `exact`
+
+**Optionally** A `boolean` used to ensure that the route's path is an exact match of the current location.
+
+
 
 ## License
 
