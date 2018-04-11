@@ -6,11 +6,12 @@ export default class App extends React.Component {
         super(props);
     }
 
-    componentDidMout() {
+    componentDidMount() {
         let self = this;
         //Add haschange event listener
         window.addEventListener("hashchange", function () {
             //Url changed --> update component
+            //console.log("Updated router app");
             return self.forceUpdate();
         }, false);
     }
