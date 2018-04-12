@@ -166,7 +166,7 @@ let homeProps = {
 
 ### Rouct.redirect(url)
 
-Use this function to change the hash segment with the provided path. This function also adds the exclamation mark to the path after the hash.  
+Use this function to change the hash segment with the provided path. This function automatically adds the exclamation mark to the path after the hash.  
 
 ```jsx
 class Menu extends React.Component {
