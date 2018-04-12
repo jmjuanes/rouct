@@ -2,7 +2,7 @@ import React from "react";
 
 //Unescape a character
 let unescape = function (str) {
-    return decodeURIComponent(str.replace(/\+/g, " "));
+    return window.decodeURIComponent(str.replace(/\+/g, " "));
 };
 
 //Parse a path
@@ -26,7 +26,7 @@ let parseQueryString = function (str) {
     str.trim().split("&").forEach(function (item) {
         //Check for empty string
         if (item.trim() === "") {
-            return {}; 
+            return; 
         }
         let items = item.trim().split("=");
         let itemKey = unescape(items[0]);
@@ -52,7 +52,7 @@ export default class Switch extends React.Component {
         let element = React.createElement("span", {}, "Not found");
         let foundPath = false;
         //Get the hash
-        let hash = window.decodeURIComponent(window.location.hash.substring(1));
+        let hash = unescape(window.location.hash.substring(1));
         if (hash.trim() === "") {
             hash = "!/";
         }
