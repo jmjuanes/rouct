@@ -143,6 +143,13 @@ A React component that should be rendered when the route matches. This component
 
 **Optionally** An `object` with the extra props that should be passed to the rendered `component` when the route matches.
 
+```jsx
+let homeProps = {
+    title: "Hello world!"
+};
+<Rouct.Route path="/" component={HomePage} props={homeProps}/>
+```
+
 ##### `exact`
 
 **Optionally** A `boolean` used to ensure that the route's path is an exact match of the current location. Default is `false`.
