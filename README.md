@@ -1,15 +1,15 @@
-# neutrine-router
+# rouct
 
 > Micro router for React.
 
-[![npm](https://img.shields.io/npm/v/neutrine-router.svg?style=flat-square)](https://www.npmjs.com/package/neutrine-router)
-[![npm](https://img.shields.io/npm/dt/neutrine-router.svg?style=flat-square)](https://www.npmjs.com/package/neutrine-router)
-[![npm](https://img.shields.io/npm/l/neutrine-router.svg?style=flat-square)](https://github.com/siimple/neutrine-router)
+[![npm](https://img.shields.io/npm/v/rouct.svg?style=flat-square)](https://www.npmjs.com/package/rouct)
+[![npm](https://img.shields.io/npm/dt/rouct.svg?style=flat-square)](https://www.npmjs.com/package/rouct)
+[![npm](https://img.shields.io/npm/l/rouct.svg?style=flat-square)](https://github.com/jmjuanes/rouct)
 [![pr](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)]()
 
 **NOTE**: this package is on development.  
 
-`neutrine-router` is a micro-router component for building Single Page Applications (SPA) with React. 
+**Rouct** is a micro-router component for building Single Page Applications (SPA) with React. 
 
 It uses the **hashbang** as the routing strategy. This strategy adds an exclamation mark after the hash to indicate that the hash is used for routing. A tipically url with a *hashbang* looks like: 
 
@@ -23,15 +23,15 @@ http://example.com/#!/about/contact
 Use `npm` to install the package:
 
 ```bash
-$ npm install --save neutrine-router
+$ npm install --save rouct
 ```
 
 ## Example 
 
-Import `neutrine-router` in your ES6 module:
+Import `rouct` in your ES6 module:
 
 ```javascript
-import * as Router from "neutrine-router";
+import * as Router from "rouct";
 ```
 
 Create a class that extends `Router.App`. This class will call automatically the `render()` method when the `hash` segment of your url changes.
