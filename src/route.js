@@ -3,7 +3,9 @@ import React from "react";
 //Route class
 export default class Route extends React.Component {
     render() {
-        return React.createElement("div", {}, null);
+        //This component should never be rendered
+        console.error("Warning: Route component should be used inside a Switch component");
+        return null;
     }
 }
 
