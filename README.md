@@ -31,26 +31,26 @@ $ npm install --save rouct
 Import `rouct` in your ES6 module:
 
 ```javascript
-import * as Router from "rouct";
+import * as Rouct from "rouct";
 ```
 
-Create a class that extends `Router.App`. This class will call automatically the `render()` method when the `hash` segment of your url changes.
+Create a class that extends `Rouct.App`. This class will call automatically the `render()` method when the `hash` segment of your url changes.
 
 ```jsx
-class MyApp extends Router.App {
+class MyApp extends Rouct.App {
     
 }
 ```
 
-Implement the `render()` method in your new class. Use the `Router.Switch` component to find the route that matches the current location, and the `Router.Route` component to define which componet will be rendered when the current location matches the route's path. 
+Implement the `render()` method in your new class. Use the `Rouct.Switch` component to find the route that matches the current location, and the `Rouct.Route` component to define which componet will be rendered when the current location matches the route's path. 
 
 ```jsx
-class MyApp extends Router.App {
+class MyApp extends Rouct.App {
     render() {
         return (
-            <Router.Switch>
-                <Router.Route exact path="/" component={HomePage}/>
-            </Router.Switch>
+            <Rouct.Switch>
+                <Rouct.Route exact path="/" component={HomePage}/>
+            </Rouct.Switch>
         );
     }
 }
@@ -69,62 +69,62 @@ class HomePage extends React.Component {
 
 ## API 
 
-### Router.App
+### Rouct.App
 
-`Router.App` is an abstract class that extends `React.Component`, but with the addition that the `render()` method will be called when the *hash* string of your site changes.
+`Rouct.App` is an abstract class that extends `React.Component`, but with the addition that the `render()` method will be called when the *hash* string of your site changes.
 
 ```jsx
-class App extends Router.App {
+class App extends Rouct.App {
     render() {
         //Here goes your content
     }
 }
 ```
 
-### Router.Switch
+### Rouct.Switch
 
-A component that renders the first child `Router.Route` that matches the current location. 
+A component that renders the first child `Rouct.Route` that matches the current location. 
 
 ```jsx
-<Router.Switch>
+<Rouct.Switch>
     /* Insert here your routes */
-</Router.Switch>
+</Rouct.Switch>
 ```
 
-### Router.Route
+### Rouct.Route
 
 A React component that is used to assign a path to a component that should be rendered if the current path matches the route path.
 
 ```jsx
-<Router.Switch>
-    <Router.Route exact path="/" component={HomePage}/>
-    <Router.Route exact path="/about" component={AboutPage}/>
-    <Router.Route exact path="/portfolio" component={PortfolioPage}/>
-</Router.Switch>
+<Rouct.Switch>
+    <Rouct.Route exact path="/" component={HomePage}/>
+    <Rouct.Route exact path="/about" component={AboutPage}/>
+    <Rouct.Route exact path="/portfolio" component={PortfolioPage}/>
+</Rouct.Switch>
 ```
 
-> **Important note**: The `Router.Route` component should always be used inside a `Router.Switch` component. Otherwise it will render nothing.
+> **Important note**: The `Rouct.Route` component should always be used inside a `Rouct.Switch` component. Otherwise it will render nothing.
 
-The `Router.Route` component expects the following props:
+The `Rouct.Route` component expects the following props:
 
 ##### `path`
 
 A `string` that describes the pathname that the route matches. When the current location matches the route's path, the component specified by the `component` prop is rendered.
 
 ```jsx
-<Router.Route path="/about/contact" component={ContactPage}/>
+<Rouct.Route path="/about/contact" component={ContactPage}/>
 ```
 
 The `path` can also be a dynamic path string, using named parameters prefixed by a colon to the parameter name. For example, the path `/user/:name` matches `/user/bob` and `user/susan`. The captured values are stored in the `request.params` object passed as a property to the rendered component.
 
 ```jsx
-<Router.Route path="/user/:name" component={UserManagement}/>
+<Rouct.Route path="/user/:name" component={UserManagement}/>
 ```
 
 You can also create a catch-all route setting the `path` value to `*`:
 
 ```jsx
-<Router.Route path="*" component={NotFoundPage}/>
+<Rouct.Route path="*" component={NotFoundPage}/>
 ``` 
 
 > **Important note**: query strings are not part of the route path.
@@ -157,7 +157,7 @@ A React component that should be rendered when the route matches. This component
 | `/one/two`    | `/one/two`   | No               | Yes      |
 
 
-### Router.redirect(url)
+### Rouct.redirect(url)
 
 Use this function to change the hash segment with the provided path. This function also adds the exclamation mark to the path after the hash.  
 
@@ -166,9 +166,9 @@ class Menu extends React.Component {
     render() {
         return (
             <div className="menu">
-                <a className="menu-link" onClick={() => Router.redirect("/");}>Home</a>
-                <a className="menu-link" onClick={() => Router.redirect("/about");}>About</a>
-                <a className="menu-link" onClick={() => Router.redirect("/portfolio");}>Portfolio</a>
+                <a className="menu-link" onClick={() => Rouct.redirect("/");}>Home</a>
+                <a className="menu-link" onClick={() => Rouct.redirect("/about");}>About</a>
+                <a className="menu-link" onClick={() => Rouct.redirect("/portfolio");}>Portfolio</a>
             </div>
         );
     }
