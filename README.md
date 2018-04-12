@@ -1,6 +1,6 @@
 # rouct
 
-> Micro router for React.
+> Micro client-side routing component for React.
 
 [![npm](https://img.shields.io/npm/v/rouct.svg?style=flat-square)](https://www.npmjs.com/package/rouct)
 [![npm](https://img.shields.io/npm/dt/rouct.svg?style=flat-square)](https://www.npmjs.com/package/rouct)
@@ -9,7 +9,7 @@
 
 **NOTE**: this package is on development.  
 
-**Rouct** is a micro-router component for building Single Page Applications (SPA) with React. 
+**Rouct** is a micro client-side routing component for building **single page applications** (SPA for short) with [React](https://www.reactjs.org). 
 
 It uses the **hashbang** as the routing strategy. This strategy adds an exclamation mark after the hash to indicate that the hash is used for routing. A tipically url with a *hashbang* looks like: 
 
