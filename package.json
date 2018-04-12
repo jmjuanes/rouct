@@ -1,12 +1,12 @@
 {
-    "name": "neutrine-router",
-    "description": "Micro router for React",
-    "version": "0.0.1",
+    "name": "rouct",
+    "description": "Micro router component for React",
+    "version": "0.0.0",
     "license": "MIT",
     "author": "Josemi Juanes <josemijuanes@gmail.com>",
     "repository": {
         "type": "git",
-        "url": "https://github.com/siimple/neutrine-router"
+        "url": "https://github.com/jmjuanes/rouct"
     },
     "main": "index.js",
     "dependencies": {
