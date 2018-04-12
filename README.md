@@ -147,7 +147,7 @@ A React component that should be rendered when the route matches. This component
 
 **Optionally** A `boolean` used to ensure that the route's path is an exact match of the current location. Default is `false`.
 
-| Router's path | Current path | Exact is active? | Matches? |
+| Router's path | Current path | Is Exact active? | Matches? |
 |---------------|--------------|------------------|----------|
 | `/`           | `/one/two`   | Yes              | No       |
 | `/`           | `/one/two`   | No               | Yes      | 
