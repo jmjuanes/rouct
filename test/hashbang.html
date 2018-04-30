@@ -31,8 +31,10 @@
             let route2 = h(Rouct.Route, {path: "/section1", component: Section, props: {section: "Section 1"}});
             let route3 = h(Rouct.Route, {path: "/section1", component: Section, props: {section: "Section 1"}});
             let dispatcher = h(Rouct.Switch, {debug: true}, route1, route2, route3);
+            //Render a single soute
+            let singleRoute = h(Rouct.Route, {path: "/section1", component: SingleRoute});
             //Render the hashbang router
-            return h(Rouct.HashbangRouter, {}, links, dispatcher);
+            return h(Rouct.HashbangRouter, {}, links, dispatcher, singleRoute);
         }
     }
     
@@ -42,7 +44,15 @@
             console.log("Home route");
             return h("div", {}, "Home route");
         }
-    } 
+    }
+
+    //Single route component 
+    class SingleRoute extends React.Component {
+        render() {
+            console.log("Single route matches");
+            return h("div", {}, "Single route content");
+        }
+    }
     
     //Section component
     class Section extends React.Component {
