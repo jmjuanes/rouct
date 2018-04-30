@@ -29,7 +29,6 @@ let parseQueryString = function (str) {
     return query;
 };
 
-
 //Export Router component 
 export default class Router extends React.Component {
     render() {
