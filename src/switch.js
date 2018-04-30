@@ -10,7 +10,7 @@ export default class Switch extends React.Component {
             let matchFound = false;
             let element = null;
             //Iterate over all routes
-            React.Children.forEach(this.props.children, function (child) {
+            React.Children.forEach(self.props.children, function (child) {
                 //Check if a match has not been found
                 if (matchFound === true || React.isValidElement(child) === false) {
                     return;
