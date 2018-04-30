@@ -1,0 +1,68 @@
+<!-- Import modules -->
+<script type="text/javascript" src="../node_modules/react/umd/react.development.js"></script>
+<script type="text/javascript" src="../node_modules/react-dom/umd/react-dom.development.js"></script>
+<script type="text/javascript" src="../umd/rouct.js"></script>
+<!-- App container -->
+<div id="app"></div>
+<!-- App code -->
+<script type="text/javascript">
+    var h = React.createElement;
+    //Helper to create a link to the proviedd path
+    let createLink = function (name, to, index) {
+        let clickListener = function () {
+            return Rouct.redirectHashbang(to);
+        };
+        return h("div", {key: index, onClick: clickListener}, name);
+    }; 
+
+    //Main app component
+    class App extends React.Component {
+        constructor(props) {
+            super(props);
+        } 
+        render() {
+            //Menu links
+            let link1 = createLink("Home", "/", 1);
+            let link2 = createLink("Link 1", "/section1/sub1", 2);
+            let link3 = createLink("Link 2", "/section1/sub2?key1=value1", 3);
+            let links = h("div", {}, link1, link2, link3);
+            //Routes dispatcher
+            let route1 = h(Rouct.Route, {exact: true, path: "/", component: Home, props: {}});
+            let route2 = h(Rouct.Route, {path: "/section1", component: Section, props: {section: "Section 1"}});
+            let route3 = h(Rouct.Route, {path: "/section1", component: Section, props: {section: "Section 1"}});
+            let dispatcher = h(Rouct.Switch, {debug: true}, route1, route2, route3);
+            //Render the hashbang router
+            return h(Rouct.HashbangRouter, {}, links, dispatcher);
+        }
+    }
+    
+    //Home component
+    class Home extends React.Component {
+        render() {
+            console.log("Home route");
+            return h("div", {}, "Home route");
+        }
+    } 
+    
+    //Section component
+    class Section extends React.Component {
+        render() {
+            console.log(this.props.request);
+            let section = h("div", {}, "Section: " + this.props.section);
+            let route1 = h(Rouct.Route, {exact: true, path: "/section1/sub1", component: SubSection, props: {subSection: "SubSection 1"}});
+            let route2 = h(Rouct.Route, {exact: true, path: "/section1/sub2", component: SubSection, props: {subSection: "SubSection 2"}});
+            let dispatcher = h(Rouct.Switch, {debug: true}, route1, route2);
+            return h("div", {}, section, dispatcher);
+        }
+    }
+    
+    //Subsection component
+    class SubSection extends React.Component {
+        render() {
+            return h("div", {}, "Current subSection: " + this.props.subSection);
+        }
+    }
+    
+    //Render the app component
+    reactDOM.render(h(App, {}), document.getElementById("app"));
+</script>
