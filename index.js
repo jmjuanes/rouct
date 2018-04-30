@@ -1,12 +1,6 @@
-import App from "./src/app.js";
-import redirect from "./src/redirect.js";
-import Route from "./src/route.js";
-import Switch from "./src/switch.js";
-
-export {
-    App,
-    redirect,
-    Route,
-    Switch
-};
+if (process.env.NODE_ENV === "production") {
+    module.exports = require('./umd/rouct.min.js');
+} else {
+    module.exports = require('./umd/rouct.js');
+}
 
