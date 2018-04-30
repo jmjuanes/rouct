@@ -9,6 +9,13 @@
         "url": "https://github.com/jmjuanes/rouct"
     },
     "main": "index.js",
+    "keywords": [
+        "react",
+        "router",
+        "client",
+        "route",
+        "routes"
+    ],
     "dependencies": {
         "react": "^16.3.0"
     },
