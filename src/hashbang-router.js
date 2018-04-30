@@ -1,7 +1,7 @@
 import React from "react";
 
-//Router app main component
-export default class App extends React.Component {
+//Hashbang router component
+export default class HashbangRouter extends React.Component {
     constructor(props) {
         super(props);
         let self = this;
@@ -11,8 +11,14 @@ export default class App extends React.Component {
             return self.forceUpdate();
         }, false);
     }
-}
+    
+    shouldComponentUpdate() {
+        return true;
+    }
 
-//Router app default props
-App.defaultProps = {};
+    render() {
+        //Render the children without adding extra nodes to the DOM
+        return React.createElement(React.Fragment, {}, this.props.children);
+    }
+}
 
