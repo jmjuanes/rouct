@@ -22,7 +22,7 @@ export default class Route extends React.Component {
                 //Return the component
                 return React.createElement(self.props.component, props);
             }
-            //If not matches, return null
+            //If does not match, return null
             return null;
         });
     }
