@@ -1,11 +1,11 @@
-import App from "./app.js";
-import redirect from "./redirect.js";
+import HashbangRouter from "./hashbang-router.js";
+import {redirectHashbang} from "./redirect.js";
 import Route from "./route.js";
 import Switch from "./switch.js";
 
 export {
-    App,
-    redirect,
+    HashbangRouter,
+    redirectHashbang,
     Route,
     Switch
 };
