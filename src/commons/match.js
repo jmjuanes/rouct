@@ -1,5 +1,5 @@
-//Parse a path
-let parsePath = function (str) {
+//Split a path by slashes
+let splitPath = function (str) {
     let items = str.trim().split("/");
     if (items[0].trim().length === 0) {
         items.shift();
@@ -19,9 +19,9 @@ export default function match (current, pattern, exact) {
     if (pattern === "*") {
         return {matches: true, params: {}};
     }
-    //Parse the current and the pattern paths
-    let currentItems = parsePath(current);
-    let patternItems = parsePath(pattern);
+    //Split the current and the pattern paths by slashes
+    let currentItems = splitPath(current);
+    let patternItems = splitPath(pattern);
     //Check the number of path items
     if (exact === true && (currentItems.length !== patternItems.length)) {
         return {matches: false};
