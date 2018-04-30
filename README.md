@@ -28,13 +28,15 @@ $ npm install --save rouct
 
 ## Example 
 
-Import `rouct` in your ES6 module:
+First of all, you should import `rouct` in your ES6 module:
 
 ```javascript
 import * as Rouct from "rouct";
 ```
 
-Create a class that extends `Rouct.App`. This class will call automatically the `render()` method when the `hash` segment of your url changes.
+### Example using hashbang navigation method
+
+Create
 
 ```jsx
 class MyApp extends Rouct.App {
@@ -69,14 +71,26 @@ class HomePage extends React.Component {
 
 ## API 
 
-### Rouct.App
+### Rouct.Router
 
-`Rouct.App` is an abstract class that extends `React.Component`, but with the addition that the `render()` method will be called when the *hash* string of your site changes.
+The base component that is used by the router navigation strategies. Typically you should use `HashbangRouter` instead. Only use this component if you are going to implement your own navigation strategy.
+
+This component accepts the following props:
+
+- `location`: a `string` with the current location. The `Router` component will propague this location its `Route` and `Switch` children components.
 
 ```jsx
-class App extends Rouct.App {
+class App extends React.Component {
+    constructor(super) {
+        super(props);
+        this.state = {location: "/"};
+    }
+    
     render() {
-        //Here goes your content
+        return (
+            <Rouct.Router location={this.state.location}>
+                <Rouct.Route path="/" component={Home}/>
+            </Rouct.Router>
     }
 }
 ```
