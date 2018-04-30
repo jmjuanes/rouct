@@ -15,6 +15,10 @@ export default class Switch extends React.Component {
                 if (foundMatch === true || React.isValidElement(child) === false) {
                     return;
                 }
+                //Check for an invalid route component 
+                if (typeof child.props.path !== "string" || typeof child.props.component === "undefined") {
+                    return;
+                }
                 //Check if the current location matches the child path
                 let result = match(value.pathname, child.props.path, child.props.exact);
                 if (result.matches === true) {
