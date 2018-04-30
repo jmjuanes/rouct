@@ -1,5 +1,5 @@
 //Redirect to a given path
-export default function redirect(path) {
+export function redirectHashbang(path) {
     if (typeof path !== "string") {
         //Invalid path
         throw new Error("Expected string path in redirect method");
