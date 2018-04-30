@@ -24,9 +24,13 @@
         "rollup": "^0.57.1",
         "rollup-plugin-commonjs": "^9.1.0",
         "rollup-plugin-node-resolve": "^3.3.0",
-        "rollup-plugin-replace": "^2.0.0"
+        "rollup-plugin-replace": "^2.0.0",
+        "rollup-plugin-uglify": "^3.0.0"
     },
     "scripts": {
-        "test": "./node_modules/.bin/rollup -c rollup.test.config.js"
+        "build": "npm run build:dev && npm run build:prod",
+        "build:dev": "./node_modules/.bin/rollup -c rollup.config.js --environment NODE_ENV:development",
+        "build:prod": "./node_modules/.bin/rollup -c rollup.config.js --environment NODE_ENV:production",
+        "test": "npm run build:dev"
     }
 }
