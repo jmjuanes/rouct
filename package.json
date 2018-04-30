@@ -1,7 +1,7 @@
 {
     "name": "rouct",
     "description": "Micro client-side router component for React",
-    "version": "0.0.0",
+    "version": "0.0.1",
     "license": "MIT",
     "author": "Josemi Juanes <josemijuanes@gmail.com>",
     "repository": {
