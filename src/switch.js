@@ -1,12 +1,12 @@
 import React from "react";
-import {Consumer} from "./context.js";
+import {Context} from "./context.js";
 import match from "./commons/match.js";
 
 //Switch class
 export default class Switch extends React.Component {
     render() {
         let self = this;
-        return React.createElement(Consumer, {}, function (value) {
+        return React.createElement(Context.Consumer, {}, function (value) {
             let matchFound = false;
             let element = null;
             //Iterate over all routes
