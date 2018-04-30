@@ -12,7 +12,7 @@ export default class Switch extends React.Component {
             //Iterate over all routes
             React.Children.forEach(this.props.children, function (child) {
                 //Check if a match has not been found
-                if (foundMatch === true || React.isValidElement(child) === false) {
+                if (matchFound === true || React.isValidElement(child) === false) {
                     return;
                 }
                 //Check for an invalid route component 
@@ -27,7 +27,7 @@ export default class Switch extends React.Component {
                     //Clone the new element props 
                     let props = Object.assign({request: request}, child.props.props);
                     element = React.createElement(child.props.component, props);
-                    mathFound = true;
+                    matchFound = true;
                 }
             });
             //Return the element 
