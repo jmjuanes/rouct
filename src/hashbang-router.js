@@ -1,10 +1,7 @@
 import React from "react";
+
 import Router from "./router.js";
-//
-//Unescape a character
-let unescape = function (str) {
-    return window.decodeURIComponent(str.replace(/\+/g, " "));
-};
+import unescape from "./commons/unescape.js";
 
 //Get the current hash
 let currentHash = function () {
