@@ -11,7 +11,7 @@ export default class Route extends React.Component {
             return null;
         }
         //Render the consumer component
-        return React.createElement(Conext.Consumer, {}, function (value) {
+        return React.createElement(Context.Consumer, {}, function (value) {
             //Check if the path of the route matches the current location
             let result = match(value.pathname, self.props.path, self.props.exact);
             if (result.matches === true) {
