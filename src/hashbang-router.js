@@ -30,7 +30,7 @@ export default class HashbangRouter extends React.Component {
     handleHashChange() {
         //Update the state with the new location
         return this.setState({
-            "location": currentHash();
+            "location": currentHash()
         });
     }
 
