@@ -169,11 +169,9 @@ A component that renders the first child `Rouct.Route` that matches the current 
 A React component that is used to assign a path to a component that should be rendered if the current path matches the route path.
 
 ```jsx
-<Rouct.Switch>
-    <Rouct.Route exact path="/" component={HomePage}/>
-    <Rouct.Route exact path="/about" component={AboutPage}/>
-    <Rouct.Route exact path="/portfolio" component={PortfolioPage}/>
-</Rouct.Switch>
+<Rouct.Route exact path="/" component={HomePage}/>
+<Rouct.Route exact path="/about" component={AboutPage}/>
+<Rouct.Route exact path="/portfolio" component={PortfolioPage}/>
 ```
 
 The `Rouct.Route` component expects the following props:
