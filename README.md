@@ -7,7 +7,9 @@
 [![npm](https://img.shields.io/npm/l/rouct.svg?style=flat-square)](https://github.com/jmjuanes/rouct)
 [![pr](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)]()
 
-**NOTE**: this package is on development.  
+
+> **IMPORTANT NOTE**
+> This package is on development. At this moment only the hashbang strategy has been implemented. We are working on the implementation of another routing strategy. 
 
 **Rouct** is a micro client-side routing component for building **single page applications** (SPA for short) with [React](https://www.reactjs.org). 
 
