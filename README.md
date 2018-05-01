@@ -157,7 +157,10 @@ A component that renders the first child `Rouct.Route` that matches the current 
 
 ```jsx
 <Rouct.Switch>
-    /* Insert here your routes */
+    <Rouct.Route exact path="/" component={HomePage}/>
+    <Rouct.Route path="/services" component={ServicesPage}/>
+    <Rouct.Route exact path="/about" component={AboutPage}/>
+    <Rouct.Route path="*" component={NotFound}/>
 </Rouct.Switch>
 ```
 
@@ -172,8 +175,6 @@ A React component that is used to assign a path to a component that should be re
     <Rouct.Route exact path="/portfolio" component={PortfolioPage}/>
 </Rouct.Switch>
 ```
-
-> **Important note**: The `Rouct.Route` component should always be used inside a `Rouct.Switch` component. Otherwise it will render nothing.
 
 The `Rouct.Route` component expects the following props:
 
