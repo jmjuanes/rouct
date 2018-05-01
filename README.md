@@ -26,44 +26,101 @@ Use `npm` to install the package:
 $ npm install --save rouct
 ```
 
-## Example 
-
-First of all, you should import `rouct` in your ES6 module:
+You can now import `rouct` in your ES6 module:
 
 ```javascript
 import * as Rouct from "rouct";
 ```
 
-### Example using hashbang navigation method
+Or include it in your HTML file:
 
-Create
-
-```jsx
-class MyApp extends Rouct.App {
-    
-}
+```html
+<script type="text/javascript" src="./node_modules/react/umd/react.development.js"></script>
+<script type="text/javascript" src="./node_modules/react-dom/umd/react-dom.development.js"></script>
+<script type="text/javascript" src="./node_modules/rouct/umd/rouct.js"></script>
 ```
 
-Implement the `render()` method in your new class. Use the `Rouct.Switch` component to find the route that matches the current location, and the `Rouct.Route` component to define which componet will be rendered when the current location matches the route's path. 
+## Example
 
 ```jsx
-class MyApp extends Rouct.App {
+import React from "react";
+import * as Rouct from "rouct";
+
+// Main component
+class App extends React.Component {
     render() {
         return (
-            <Rouct.Switch>
-                <Rouct.Route exact path="/" component={HomePage}/>
-            </Rouct.Switch>
+            <ul>
+                <li onClick={() => Rouct.redirectHashbang("/"); }>Home</li>
+                <li onClick={() => Rouct.redirectHashbang("/products"); }>Products</li>
+                <li onClick={() => Rouct.redirectHashbang("/about"); }>About</li>
+            </ul>
+            <hr/>
+            <Rouct.HashbangRouter>
+                <Rouct.Switch>
+                    <Rouct.Route exact path="/" component={HomePage}/>
+                    <Rouct.Route path="/products" component={ProductsPage}/>
+                    <Rouct.Route exact path="/about" component={AboutPage}/>
+                    <Rouct.Route path="*" component={NotFound}/>
+                </Rouct.Switch>
+            </Rouct.HashbangRouter>
         );
     }
 }
-``` 
 
-Now implement your `HomePage` component that will be rendered when the user navigates to the root of your website:
-
-```jsx
+// The HomePage component will be rendered when the user navigates to the root of your website ( '/' or '#!/')
 class HomePage extends React.Component {
     render() {
-        return <div>Hello world!</div>
+        return (
+            <h2>Welcome</div>
+            <div>Welcome to our page</div>
+        );
+    }
+}
+
+// The Products page will be rendered when the user navigates to '#!/products'. 
+// This component will also catch any path that starts with '#!/products' (note that the 'exact' attribute is not used in the products route of the App component).
+class ProductsPage extends React.Component {
+    render() {
+        return (
+            <h2>Products</h2>
+            <ul>
+                <li onClick={() => Rouct.redirectHashbang("/products/product1"); }>Product 1</li>
+                <li onClick={() => Rouct.redirectHashbang("/products/product2"); }>Product 2</li>
+            </ul>
+            <Rouct.Route exact path="/products" component={EmptyProductPage}/>
+            <Rouct.Route exact path="/products/:product" component={DetailProductPage}/>
+        );
+    } 
+}
+
+class DetailProductPage extends React.Component {
+    render() {
+        let product = this.props.request.params.product;
+        return (
+            <h5>{product}</h5>
+            <div>Here goes the product description</div>
+        );
+    }
+}
+
+class EmptyProductPage extends React.Component {
+    render() {
+        return <div>Please select a product from the list</div>;
+    }
+}
+
+//The AboutPage component will be rendered when the user navigates to '#!/about'
+class AboutPage extends React.Component {
+    render() {
+        return <h2>About</h2>;
+    }
+}
+
+// The NotFound component will be rendered when the user navigates to another url not listed above
+class NotFound extends React.Component {
+    render() {
+        return <h2>Not found</h2>;
     }
 }
 ```
