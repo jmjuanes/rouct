@@ -4,10 +4,8 @@
     "version": "0.0.1",
     "license": "MIT",
     "author": "Josemi Juanes <josemijuanes@gmail.com>",
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/jmjuanes/rouct"
-    },
+    "repository": "https://github.com/jmjuanes/rouct",
+    "bugs": "https://github.com/jmjuanes/rouct/issues",
     "main": "index.js",
     "keywords": [
         "react",
