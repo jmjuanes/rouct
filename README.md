@@ -272,9 +272,9 @@ class Menu extends React.Component {
     render() {
         return (
             <div className="menu">
-                <a className="menu-link" onClick={() => Rouct.redirectHashbang("/");}>Home</a>
-                <a className="menu-link" onClick={() => Rouct.redirectHashbang("/about");}>About</a>
-                <a className="menu-link" onClick={() => Rouct.redirectHashbang("/portfolio");}>Portfolio</a>
+                <a onClick={() => Rouct.redirectHashbang("/");}>Home</a>
+                <a onClick={() => Rouct.redirectHashbang("/about");}>About</a>
+                <a onClick={() => Rouct.redirectHashbang("/portfolio");}>Portfolio</a>
             </div>
         );
     }
