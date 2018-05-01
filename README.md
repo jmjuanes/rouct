@@ -13,12 +13,6 @@
 
 **Rouct** is a micro client-side routing component for building **single page applications** (SPA for short) with [React](https://www.reactjs.org). 
 
-It uses the **hashbang** as the routing strategy. This strategy adds an exclamation mark after the hash to indicate that the hash is used for routing. A tipically url with a *hashbang* looks like: 
-
-```
-http://example.com/#!/about/contact
-```
- 
 
 ## Installation 
 
@@ -240,7 +234,36 @@ let homeProps = {
 | `/one/two`    | `/one/two`   | No               | Yes      |
 
 
-### Rouct.redirect(url)
+### Hashbang routing
+
+The **hashbang** routing strategy adds an exclamation mark after the hash to indicate that the hash is used for routing. A tipically url with a *hashbang* looks like: 
+
+```
+http://example.com/#!/about/contact
+```
+
+Using this strategy is guaranteed to work in browsers that do not support `history.pushState` (of course, IE9 and).
+
+#### Rouct.HashbangRouter
+
+A `Rouct.Router` component that listens to any changes in the hash portion of your URL and propagates the new URL to any children of the type `Rouct.Switch` and `Rouct.Route`.
+
+```jsx
+class App extends React.Component {
+    render() {
+        return (
+            <Rouct.HashbangRouter> 
+                {/* Place here your children components */}
+            </Rouct.HashbangRouter>
+        );
+    }
+}
+```
+
+Note that you should user only one `Rouct.HashbangRouter` component in your application to avoid unexpected behavior.
+
+
+#### Rouct.redirectHashbang(url)
 
 Use this function to change the hash segment with the provided path. This function automatically adds the exclamation mark to the path after the hash.  
 
@@ -249,9 +272,9 @@ class Menu extends React.Component {
     render() {
         return (
             <div className="menu">
-                <a className="menu-link" onClick={() => Rouct.redirect("/");}>Home</a>
-                <a className="menu-link" onClick={() => Rouct.redirect("/about");}>About</a>
-                <a className="menu-link" onClick={() => Rouct.redirect("/portfolio");}>Portfolio</a>
+                <a className="menu-link" onClick={() => Rouct.redirectHashbang("/");}>Home</a>
+                <a className="menu-link" onClick={() => Rouct.redirectHashbang("/about");}>About</a>
+                <a className="menu-link" onClick={() => Rouct.redirectHashbang("/portfolio");}>Portfolio</a>
             </div>
         );
     }
