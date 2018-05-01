@@ -9,10 +9,12 @@
 
 
 > **IMPORTANT NOTE**
-> This package is on development. At this moment only the hashbang strategy has been implemented. We are working on the implementation of another routing strategy. 
+> This package is on development, so and its use will be under your own risk. 
+> At this moment only the hashbang strategy has been implemented. We are working on the implementation of more routing strategies. 
 
 **Rouct** is a micro client-side routing component for building **single page applications** (SPA for short) with [React](https://www.reactjs.org). 
 
+**Rouct** is based on the new **Context API** of [**React 16.3.0**](https://reactjs.org/docs/context.html), so this package only works with versions of React higher than `16.3.0`.
 
 ## Installation 
 
