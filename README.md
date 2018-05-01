@@ -68,7 +68,7 @@ class App extends React.Component {
     }
 }
 
-// The HomePage component will be rendered when the user navigates to the root of your website ( '/' or '#!/')
+// The HomePage component will be rendered when the user navigates to the root ('/' or '#!/')
 class HomePage extends React.Component {
     render() {
         return (
