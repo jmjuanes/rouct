@@ -9,7 +9,7 @@
 
 
 > **IMPORTANT NOTE**
-> This package is on development, so and its use will be under your own risk. 
+> This package is on development, so its use will be under your own risk. 
 > At this moment only the hashbang strategy has been implemented. We are working on the implementation of more routing strategies. 
 
 **Rouct** is a micro client-side routing component for building **single page applications** (SPA for short) with [React](https://www.reactjs.org). 
