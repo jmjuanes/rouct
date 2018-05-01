@@ -72,14 +72,15 @@ class App extends React.Component {
 class HomePage extends React.Component {
     render() {
         return (
-            <h2>Welcome</div>
+            <h2>Welcome</h2>
             <div>Welcome to our page</div>
         );
     }
 }
 
 // The Products page will be rendered when the user navigates to '#!/products'. 
-// This component will also catch any path that starts with '#!/products' (note that the 'exact' attribute is not used in the products route of the App component).
+// This component will also catch any path that starts with '#!/products' 
+// (note that the 'exact' attribute is not used in the products route of the App component).
 class ProductsPage extends React.Component {
     render() {
         return (
