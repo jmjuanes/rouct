@@ -42,6 +42,8 @@ Or include it in your HTML file:
 
 ## Example
 
+There is an example of a simple website using `rouct` with the **hashbang** routing strategy.
+
 ```jsx
 import React from "react";
 import * as Rouct from "rouct";
