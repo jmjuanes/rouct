@@ -26,7 +26,7 @@ let config = {
 
 //Check the node environment
 if (process.env.NODE_ENV === "production") {
-    config.output.file = "./umd/rouct-min.js";
+    config.output.file = "./umd/rouct.min.js";
     config.plugins.push(uglify());
 }
 
