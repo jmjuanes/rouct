@@ -5,7 +5,8 @@ import unescape from "./commons/unescape.js";
 //Get the current hash
 let currentHash = function () {
     //Get the current hash value
-    let hash = unescape(window.location.hash.substring(1));
+    //let hash = unescape(window.location.hash.substring(1));
+    let hash = window.location.hash.substring(1);
     //Check for empty hash --> home route
     if (hash.trim() === "") {
         return "/";
@@ -18,7 +19,6 @@ let currentHash = function () {
 export default class HashbangRouter extends React.Component {
     constructor(props) {
         super(props);
-        let self = this;
         //Initialize the state with the current hashbang location
         this.state = {
             "location": currentHash()
@@ -52,7 +52,7 @@ export default class HashbangRouter extends React.Component {
 
     render() {
         //Render the router component
-        return React.createElement(Router, {location: this.state.location}, this.props.children);
+        return React.createElement(Router, {"location": this.state.location}, this.props.children);
     }
 }
 
