@@ -1,5 +1,3 @@
-
-
 ## 0.1.1 (June 3, 2018)
 
 - Fixed bug getting the current hash string.
