@@ -1,9 +1,9 @@
 import commonjs from "rollup-plugin-commonjs";
 import replace from "rollup-plugin-replace";
 import resolve from "rollup-plugin-node-resolve";
-import uglify from "rollup-plugin-uglify";
+import { terser } from "rollup-plugin-terser";
 
-//Initialize the configuration file
+//Initialize the configuration object
 let config = {
     "input": "./src/index.js",
     "output": {
@@ -27,8 +27,9 @@ let config = {
 //Check the node environment
 if (process.env.NODE_ENV === "production") {
     config.output.file = "./umd/rouct.min.js";
-    config.plugins.push(uglify());
+    config.plugins.push(terser());
 }
 
+//Export rollup configuration 
 export default config;
 
