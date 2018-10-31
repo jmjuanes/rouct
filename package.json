@@ -14,10 +14,9 @@
         "route",
         "routes"
     ],
-    "dependencies": {
-        "react": "^16.6.0"
-    },
+    "dependencies": {},
     "devDependencies": {
+        "react": "^16.6.0",
         "react-dom": "^16.6.0",
         "rollup": "^0.66.6",
         "rollup-plugin-commonjs": "^9.2.0",
