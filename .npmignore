@@ -1,3 +1,4 @@
 src/
 test/
 rollup.config.js
+*.swp
