@@ -59,4 +59,5 @@ typings/
 
 # Other files and folders
 *.swp
+umd/
 
