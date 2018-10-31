@@ -1,3 +1,7 @@
+## 0.1.2 (October 31, 2018)
+
+- Remove React as a dependency. Minor changes.
+
 ## 0.1.1 (June 3, 2018)
 
 - Fixed bug getting the current hash string.
