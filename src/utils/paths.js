@@ -3,7 +3,7 @@ export function addLeadingSlash (pathString) {
     return (pathString.charAt(0) === "/") ? pathString : "/" + pathString;
 }
 //Parse a string path
-export function formatPath (pathString) {
+export function parsePath (pathString) {
     let parsedPath = (typeof pathString === "string") ? addLeadingSlash(pathString) : "/";
     let pathname = parsedPath;
     let search = "";
