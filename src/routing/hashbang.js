@@ -3,7 +3,7 @@ import React from "react";
 
 //Import rouct libs
 import Router from "../router.js";
-import unescape from "../commons/unescape.js";
+import unescape from "../utils/unescape.js";
 
 //Get the current hash
 let getCurrentHashbangPath = function () {
