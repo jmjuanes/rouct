@@ -1,4 +1,6 @@
 import React from "react";
+
+//Import rouct dependencies
 import {Context} from "./context.js";
 import match from "./commons/match.js";
 
@@ -23,9 +25,9 @@ export default class Switch extends React.Component {
                 let result = match(value.pathname, child.props.path, child.props.exact);
                 if (result.matches === true) {
                     //Initialize the request object
-                    let request = Object.assign({params: result.params}, value);
+                    let request = Object.assign({"params": result.params}, value);
                     //Clone the new element props 
-                    let props = Object.assign({request: request}, child.props.props);
+                    let props = Object.assign({"request": request}, child.props.props);
                     element = React.createElement(child.props.component, props);
                     matchFound = true;
                 }
