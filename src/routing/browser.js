@@ -42,7 +42,7 @@ export class BrowserRouter extends React.Component {
 }
 
 //Function to redirect to a given path 
-export function redirect (newPath) {
+export function redirectBrowser (newPath) {
     return history.push(newPath);
 }
 
