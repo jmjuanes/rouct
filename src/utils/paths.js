@@ -25,7 +25,7 @@ export function parsePath (pathString) {
         "path": parsedPath,
         "pathname": pathname,
         "search": (search === "?") ? "" : search,
-        "hash": (hash === "#") ? "" : hash;
+        "hash": (hash === "#") ? "" : hash
     };
 }
 
