@@ -1,9 +1,12 @@
+//Import dependencies
 import React from "react";
-import Router from "./router.js";
-import unescape from "./commons/unescape.js";
+
+//Import rouct libs
+import Router from "../router.js";
+import unescape from "../commons/unescape.js";
 
 //Get the current hash
-let currentHash = function () {
+let getCurrentHashbangPath = function () {
     //Get the current hash value
     //let hash = unescape(window.location.hash.substring(1));
     let hash = window.location.hash.substring(1);
@@ -19,40 +22,32 @@ let currentHash = function () {
 export default class HashbangRouter extends React.Component {
     constructor(props) {
         super(props);
-        //Initialize the state with the current hashbang location
+        //Initialize the state with the current hashbang path
         this.state = {
-            "location": currentHash()
+            "path": getCurrentHashbangPath()
         };
         //Bind hash change method
         this.handleHashChange = this.handleHashChange.bind(this);
     }
-
+    //Hash change listener
     handleHashChange() {
-        //Update the state with the new location
-        return this.setState({
-            "location": currentHash()
-        });
+        let currentPath = getCurrentHashbangPath();
+        //Update the state with the current hasbahng path
+        return this.setState({"path": currentPath});
     }
-
+    //Component did mount
     componentDidMount () {
         let self = this;
-        //Start listening hash change events
         window.addEventListener("hashchange", self.handleHashChange, false);
     }
-
+    //Component will unmount
     componentWillUnmount() {
         let self = this;
-        //Remove the hashchange event listener
         window.removeEventListener("hashchange", self.handleHashChange); 
     }
-
-    shouldComponentUpdate() {
-        return true;
-    }
-
+    //Render the router component
     render() {
-        //Render the router component
-        return React.createElement(Router, {"location": this.state.location}, this.props.children);
+        return React.createElement(Router, {"path": this.state.path}, this.props.children);
     }
 }
 
