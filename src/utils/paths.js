@@ -3,7 +3,7 @@ export function addLeadingSlash (pathString) {
     return (pathString.charAt(0) === "/") ? pathString : "/" + pathString;
 }
 //Parse a string path
-export function format (pathString) {
+export function formatPath (pathString) {
     let parsedPath = (typeof pathString === "string") ? addLeadingSlash(pathString) : "/";
     let pathname = parsedPath;
     let search = "";
@@ -43,4 +43,19 @@ export function buildPath (pathname, search, hash) {
     //Return the build path
     return buildPath;
 }
+
+//Split a path by slashes
+export function splitPath (pathString) {
+    let items = pathString.trim().split("/");
+    //Check for empty first item
+    if (items[0].trim().length === 0) {
+        items.shift();
+    }
+    //Check for empty last item
+    if (items[items.length - 1].trim().length === 0) {
+        items.pop();
+    }
+    //items.map(function(item){ return item.trim(); });
+    return items;
+};
 
