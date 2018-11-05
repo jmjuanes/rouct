@@ -27,13 +27,13 @@ export class BrowserRouter extends React.Component {
     componentDidMount() {
         let self = this;
         //Register the history change listener
-        history.addChangeListener(self.handleHistoryChange);
+        history.addChangeListener(function (newPath) {
+            return self.handleHistoryChange(newPath); 
+        });
     }
     //Component will unmount listener
     componentWillUnmount() {
-        let self = this;
-        //Remove the history change listener
-        history.removeChangeListener(self.handleHistoryChange);
+        history.removeChangeListener();
     }
     //Render the router component
     render() {
