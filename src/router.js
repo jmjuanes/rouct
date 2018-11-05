@@ -41,7 +41,7 @@ export default class Router extends React.Component {
         //Get the current path
         let currentPath = (typeof this.props.path === "string") ? paths.addLeadingSlash(this.props.path) : "/";
         //Initialize the request object
-        let request = paths.parsePath(currenrPath);
+        let request = paths.parsePath(currentPath);
         //Add query string values
         request.query = (request.search !== "") ? parseQueryString(request.search) : {};
         //Render the provider
