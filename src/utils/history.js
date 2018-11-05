@@ -30,7 +30,7 @@ export default function createHistory () {
     };
     //Handle pop state listener
     let handlePopState = function (event) {
-        return triggerChangeLiseners(getCurrentPath());
+        return triggerChangeListeners(getCurrentPath());
     };
     //Register the popstate listener
     window.addEventListener("popstate", handlePopState, false);
