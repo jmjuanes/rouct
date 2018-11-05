@@ -33,7 +33,7 @@ export default function createHistory () {
         return triggerChangeLiseners(getCurrentPath());
     };
     //Register the popstate listener
-    window.addEventLisener("popstate", handlePopState, false);
+    window.addEventListener("popstate", handlePopState, false);
     //Return managers
     return {
         "getCurrentPath": getCurrentPath,
