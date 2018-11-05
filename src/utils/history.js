@@ -3,9 +3,9 @@ import * as paths from "./paths.js";
 
 //History wrapper
 export default function createHistory () {
-    //Current state
+    //History state
     let state = {
-        "listeners": []
+        "changeListener": null
     };
     //Get the current path
     let getCurrentPath = function () {
@@ -15,51 +15,34 @@ export default function createHistory () {
         return paths.addLeadingSlash(currentPath);
     };
     //Trigger change listeners
-    let triggerChangeListeners = function (newPath) {
-        return state.listeners.forEach(function (listener) {
-            return listener(newPath);
-        });
-    };
-    //Push to history
-    let pushHistory = function (newPath) {
-        newPath = paths.addLeadingSlash(newPath);
-        //Add to the window history
-        window.history.pushState({}, null, newPath);
-        //Trigger all change listeners
-        return triggerChangeListeners(newPath);
+    let triggerChangeListener = function (newPath) {
+        if (state.changeListener !== null) {
+            return state.changeListener(newPath);
+        }
     };
     //Handle pop state listener
     let handlePopState = function (event) {
-        return triggerChangeListeners(getCurrentPath());
+        return triggerChangeListener(getCurrentPath());
     };
     //Register the popstate listener
     window.addEventListener("popstate", handlePopState, false);
     //Return managers
     return {
         "getCurrentPath": getCurrentPath,
-        "push": pushHistory,
+        "push": function (newPath) {
+            newPath = paths.addLeadingSlash(newPath);
+            //Add to the window history
+            window.history.pushState({}, null, newPath);
+            //Trigger all change listeners
+            return triggerChangeListener(newPath);
+        },
         "addChangeListener": function (listener) {
             //Save change function listener
-            state.listeners.push(listener);
+            state.changeListener = listener;
         },
-        "removeChangeListener": function (listener) {
-            //Find and remove this listener
-            state.listeners = state.listeners.filter(function (savedListener) {
-                return savedListener !== listener;
-            });
-        },
-        "goBack": function () {
-            return window.history.go(-1);
-        },
-        "goForward": function () {
-            return window.history.go(+1);
-        },
-        "go": function (count) {
-            return window.history.go(count);
-        },
-        "destroy": function () {
-            //Remove the pop state event listener
-            window.removeEventListener("popstate", handlePopState);
+        "removeChangeListener": function () {
+            //Remove the change listener
+            state.changeListener = null;
         }
     };
 };
