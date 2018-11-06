@@ -10,6 +10,10 @@ let parseQueryString = function (str) {
     if (typeof str !== 'string') {
         return {}; 
     }
+    //Remove the first ?
+    if (str.charAt(0) === "?") {
+        str = str.substr(1);
+    }
     //Initialize the output query object
     let query = {};
     str.trim().split("&").forEach(function (item) {
