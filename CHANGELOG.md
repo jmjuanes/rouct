@@ -1,3 +1,8 @@
+
+## v0.2.0 (December 9, 2018)
+
+- Add Browser History routing based on HTML5 history API.
+
 ## 0.1.2 (October 31, 2018)
 
 - Remove React as a dependency. Minor changes.
