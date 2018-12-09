@@ -10,7 +10,6 @@
 
 > **IMPORTANT NOTE**
 > This package is on development, so its use will be under your own risk. 
-> At this moment only the hashbang strategy has been implemented. We are working on the implementation of more routing strategies. 
 
 **Rouct** is a micro client-side routing component for building **single page applications** (SPA for short) with [React](https://www.reactjs.org). 
 
@@ -235,6 +234,45 @@ let homeProps = {
 | `/one/two`    | `/one/two`   | No               | Yes      |
 
 
+### Browser History routing
+
+The **browser history** routing strategy is based on the HTML5 history API (`history.pushState` and `popstate` event listener). 
+
+#### Rouct.BrowserRouter
+
+A `Rouct.Router` component that is based on the HTML5 history API and listens to changes in the URL and propagates the new URL to any children of the type `Rouct.Switch` and `Rouct.Route`. 
+
+```jsx
+class App extends React.Component {
+    render() {
+        return (
+            <Rouct.BrowserRouter> 
+                {/* Place here your children components */}
+            </Rouct.BrowserRouter>
+        );
+    }
+}
+```
+
+#### Rouct.redirectBrowser(url)
+
+Use this function to change the URL with the provided path using `history.pushState`.
+
+```jsx
+class Menu extends React.Component {
+    render() {
+        return (
+            <div className="menu">
+                <a onClick={() => Rouct.redirectBrowser("/");}>Home</a>
+                <a onClick={() => Rouct.redirectBrowser("/about");}>About</a>
+                <a onClick={() => Rouct.redirectBrowser("/portfolio");}>Portfolio</a>
+            </div>
+        );
+    }
+}
+```
+
+
 ### Hashbang routing
 
 The **hashbang** routing strategy adds an exclamation mark after the hash to indicate that the hash is used for routing. A tipically url with a *hashbang* looks like: 
@@ -247,7 +285,7 @@ Using this strategy is guaranteed to work in browsers that do not support `histo
 
 #### Rouct.HashbangRouter
 
-A `Rouct.Router` component that listens to any changes in the hash portion of your URL and propagates the new URL to any children of the type `Rouct.Switch` and `Rouct.Route`.
+A `Rouct.Router` component that listens to changes in the hash portion of your URL and propagates the new URL to any children of the type `Rouct.Switch` and `Rouct.Route`.
 
 ```jsx
 class App extends React.Component {
