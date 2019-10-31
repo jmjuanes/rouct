@@ -1,3 +1,7 @@
+## v0.2.1 (2019-10-31)
+
+- Fixed `Switch` component to return the last child component if no route matches the current path.
+- Minor improvements.
 
 ## v0.2.0 (December 9, 2018)
 
