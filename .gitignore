@@ -60,4 +60,5 @@ typings/
 # Other files and folders
 *.swp
 umd/
+package-lock.json
 
