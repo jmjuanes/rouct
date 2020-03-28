@@ -15,6 +15,9 @@
         "route",
         "routes"
     ],
+    "scripts": {
+        "build": "./node_modules/.bin/rollup -c rollup.config.js"
+    },
     "dependencies": {},
     "devDependencies": {
         "@rollup/plugin-commonjs": "^11.0.2",
