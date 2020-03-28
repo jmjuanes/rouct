@@ -8,9 +8,6 @@
 [![pr](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)]()
 
 
-> **IMPORTANT NOTE**
-> This package is on development, so its use will be under your own risk. 
-
 **Rouct** is a micro client-side routing component for building **single page applications** (SPA for short) with [React](https://www.reactjs.org). 
 
 **Rouct** is based on the new **Context API** of [**React 16.3.0**](https://reactjs.org/docs/context.html), so this package only works with versions of React higher than `16.3.0`.
@@ -26,15 +23,7 @@ $ npm install --save rouct
 You can now import `rouct` in your ES6 module:
 
 ```javascript
-import * as Rouct from "rouct";
-```
-
-Or include it in your HTML file:
-
-```html
-<script type="text/javascript" src="./node_modules/react/umd/react.development.js"></script>
-<script type="text/javascript" src="./node_modules/react-dom/umd/react-dom.development.js"></script>
-<script type="text/javascript" src="./node_modules/rouct/umd/rouct.js"></script>
+import Rouct from "rouct";
 ```
 
 ## Example
@@ -164,6 +153,9 @@ A component that renders the first child `Rouct.Route` that matches the current 
     <Rouct.Route path="*" component={NotFound}/>
 </Rouct.Switch>
 ```
+
+This component accepts a `reset` prop (added in `v0.3.0`): if `true`, the matched route will be rendered again when path changes (default set to `false`).
+
 
 ### Rouct.Route
 
