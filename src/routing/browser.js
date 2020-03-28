@@ -1,9 +1,6 @@
-//Import dependencies
 import React from "react";
-
-//Import rouct utils
-import Router from "../router.js";
-import createHistory from "../utils/history.js";
+import {Router} from "../router.js";
+import {createHistory} from "../util/history.js";
 
 //Generate our new history manager
 let history = createHistory();
@@ -12,16 +9,17 @@ let history = createHistory();
 export class BrowserRouter extends React.Component {
     constructor(props) {
         super(props);
-        //Initialize the state with the curren path
         this.state = {
-            "path": history.getCurrentPath() 
+            "path": history.getCurrentPath()  //Initialize with the current path
         };
         //Bind internal methods
         this.handleHistoryChange = this.handleHistoryChange.bind(this);
     }
     //History change listener
     handleHistoryChange(newPath) {
-        return this.setState({"path": newPath});
+        return this.setState({
+            "path": newPath
+        });
     }
     //Component did mount listener
     componentDidMount() {
@@ -30,10 +28,12 @@ export class BrowserRouter extends React.Component {
         history.addChangeListener(function (newPath) {
             return self.handleHistoryChange(newPath); 
         });
+        history.mount(); //Start listening for changes
     }
     //Component will unmount listener
     componentWillUnmount() {
         history.removeChangeListener();
+        history.unmount(); //Stop listening for changes
     }
     //Render the router component
     render() {
