@@ -1,6 +1,6 @@
 import React from "react";
 import {Context} from "./context.js";
-import match from "./commons/match.js";
+import {match} from "./util/match.js";
 
 //Export route component
 export function Route (props) {
