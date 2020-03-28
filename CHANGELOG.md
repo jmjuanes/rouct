@@ -1,3 +1,11 @@
+
+## v0.3.0 (2020-03-28)
+
+- Changed export type: now **Rouct** can be imported using `import Rouct from "rouct";`.
+- Added `reset` property to `Switch` component for reloading the rendered route when path changes.
+- Fixed minor bugs rendering `Route` component.
+
+
 ## v0.2.1 (2019-10-31)
 
 - Fixed `Switch` component to return the last child component if no route matches the current path.
