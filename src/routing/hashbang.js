@@ -1,9 +1,6 @@
-//Import dependencies
 import React from "react";
-
-//Import rouct libs
-import Router from "../router.js";
-import unescape from "../utils/unescape.js";
+import {Router} from "../router.js";
+import {unescape} from "../util/unescape.js";
 
 //Get the current hash
 let getCurrentHashbangPath = function () {
@@ -22,18 +19,17 @@ let getCurrentHashbangPath = function () {
 export class HashbangRouter extends React.Component {
     constructor(props) {
         super(props);
-        //Initialize the state with the current hashbang path
         this.state = {
-            "path": getCurrentHashbangPath()
+            "path": getCurrentHashbangPath() //Get current path
         };
         //Bind hash change method
         this.handleHashChange = this.handleHashChange.bind(this);
     }
     //Hash change listener
     handleHashChange() {
-        let currentPath = getCurrentHashbangPath();
-        //Update the state with the current hasbahng path
-        return this.setState({"path": currentPath});
+        return this.setState({
+            "path": getCurrentHashbangPath()
+        });
     }
     //Component did mount
     componentDidMount () {
