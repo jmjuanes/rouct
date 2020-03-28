@@ -1,8 +1,7 @@
-//Import rouct libs
-import * as paths from "../utils/paths.js";
+import * as paths from "./paths.js";
 
 //Match function
-export default function match (current, pattern, exact) {
+export function match (current, pattern, exact) {
     //Initialize the params object
     let params = {};
     //Check for catch-all path
