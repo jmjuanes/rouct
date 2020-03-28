@@ -1,11 +1,8 @@
-import * as paths from "./paths.js";
+import {addLeadingSlash} from "./paths.js";
 
-//Get the current path
+//Get the current path with a leading slash
 let getCurrentPath = function () {
-    //Build the current path string
-    let currentPath = window.location.pathname + window.location.search + window.location.hash;
-    //Return the current path with a leading slash
-    return paths.addLeadingSlash(currentPath);
+    return addLeadingSlash(window.location.pathname + window.location.search + window.location.hash);
 };
 
 //History wrapper
