@@ -1,11 +1,9 @@
 import React from "react";
-
-//Import rouct dependencies
 import {Context} from "./context.js";
-import match from "./commons/match.js";
+import {match} from "./util/match.js";
 
 //Switch class
-export default function Switch (props) {
+export function Switch (props) {
     return React.createElement(Context.Consumer, {}, function (value) {
         let matchFound = false;
         let element = null;
@@ -24,16 +22,21 @@ export default function Switch (props) {
             //Check if the current location matches the child path
             let result = match(value.pathname, child.props.path, child.props.exact);
             if (result.matches === true) {
-                //Initialize the request object
-                let request = Object.assign({"params": result.params}, value);
-                //Clone the new element props 
-                let props = Object.assign({"request": request}, child.props.props);
-                element = React.createElement(child.props.component, props);
-                matchFound = true;
+                element = React.createElement(child.props.component, Object.assign({}, child.props.props, {
+                    "request": Object.assign({}, value, {
+                        "params": result.params
+                    }),
+                    "key": (props.reset === true) ? value.pathname : undefined
+                }));
+                matchFound = true; //Stop looking for route
             }
         });
         //Return the element 
         return element;
     });
 }
+
+Switch.defaultProps = {
+    "reset": false //Reset route when path changes
+};
 
