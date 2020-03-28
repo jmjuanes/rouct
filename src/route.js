@@ -5,19 +5,19 @@ import match from "./commons/match.js";
 //Export route component
 export function Route (props) {
     if (props.component === null) {
-        return null;
+        return null; //No component to render
     }
     //Render the consumer component
     return React.createElement(Context.Consumer, {}, function (value) {
         //Check if the path of the route matches the current location
         let result = match(value.pathname, props.path, props.exact);
         if (result.matches === true) {
-            //Generate the request object
-            let request = Object.assign({"params": result.params}, value);
-            //Generate the new component props 
-            let newProps = Object.assign({"request": request}, props.props);
-            //Return the component
-            return React.createElement(props.component, newProps);
+            //Render the component provided in the route props
+            return React.createElement(props.component, Object.assign({}, props.props, {
+                "request": Object.assign({}, value, {
+                    "params": result.params
+                })
+            }));
         }
         //If does not match, return null
         return null;
