@@ -1,6 +1,6 @@
-if (process.env.NODE_ENV === "production") {
-    module.exports = require("./umd/rouct.min.js");
-} else {
-    module.exports = require("./umd/rouct.js");
-}
+export * from "./src/route.js";
+export * from "./src/router.js";
+export * from "./src/switch.js";
+export * from "./src/routing/hashbang.js";
+export * from "./src/routing/browser.js";
 
