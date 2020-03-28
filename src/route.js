@@ -1,11 +1,9 @@
 import React from "react";
-
-//Import rouct libs
 import {Context} from "./context.js";
 import match from "./commons/match.js";
 
 //Export route component
-export default function Route (props) {
+export function Route (props) {
     if (props.component === null) {
         return null;
     }
@@ -17,9 +15,9 @@ export default function Route (props) {
             //Generate the request object
             let request = Object.assign({"params": result.params}, value);
             //Generate the new component props 
-            let props = Object.assign({"request": request}, props.props);
+            let newProps = Object.assign({"request": request}, props.props);
             //Return the component
-            return React.createElement(props.component, props);
+            return React.createElement(props.component, newProps);
         }
         //If does not match, return null
         return null;
