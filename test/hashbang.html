@@ -6,8 +6,7 @@
 <div id="app"></div>
 <!-- App code -->
 <script type="text/javascript">
-    var h = React.createElement;
-
+    let h = React.createElement;
     //Helper to create a link to the provied path
     let createLink = function (name, to, index) {
         let clickListener = function () {
@@ -15,7 +14,6 @@
         };
         return h("div", {key: index, onClick: clickListener}, name);
     }; 
-
     //Main app component
     class App extends React.Component {
         constructor(props) {
@@ -30,15 +28,14 @@
             //Routes dispatcher
             let route1 = h(Rouct.Route, {exact: true, path: "/", component: Home, props: {}});
             let route2 = h(Rouct.Route, {path: "/section1", component: Section, props: {section: "Section 1"}});
-            let route3 = h(Rouct.Route, {path: "/section1", component: Section, props: {section: "Section 1"}});
+            let route3 = h(Rouct.Route, {path: "/section2", component: Section, props: {section: "Section 2"}});
             let dispatcher = h(Rouct.Switch, {debug: true}, route1, route2, route3);
             //Render a single soute
-            let singleRoute = h(Rouct.Route, {path: "/section1", component: SingleRoute});
+            let singleRoute = h(Rouct.Route, {path: "/section1", component: SingleRoute, props: {}});
             //Render the hashbang router
             return h(Rouct.HashbangRouter, {}, links, dispatcher, singleRoute);
         }
     }
-    
     //Home component
     class Home extends React.Component {
         render() {
@@ -46,7 +43,6 @@
             return h("div", {}, "Home route");
         }
     }
-
     //Single route component 
     class SingleRoute extends React.Component {
         render() {
@@ -54,7 +50,6 @@
             return h("div", {}, "Single route content");
         }
     }
-    
     //Section component
     class Section extends React.Component {
         render() {
@@ -66,14 +61,13 @@
             return h("div", {}, section, dispatcher);
         }
     }
-    
     //Subsection component
     class SubSection extends React.Component {
         render() {
             return h("div", {}, "Current subSection: " + this.props.subSection);
         }
     }
-    
     //Render the app component
     ReactDOM.render(h(App, {}), document.getElementById("app"));
 </script>
+
