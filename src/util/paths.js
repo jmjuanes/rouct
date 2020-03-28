@@ -2,6 +2,7 @@
 export function addLeadingSlash (pathString) {
     return (pathString.charAt(0) === "/") ? pathString : "/" + pathString;
 }
+
 //Parse a string path
 export function parsePath (pathString) {
     let parsedPath = (typeof pathString === "string") ? addLeadingSlash(pathString) : "/";
@@ -57,5 +58,5 @@ export function splitPath (pathString) {
     }
     //items.map(function(item){ return item.trim(); });
     return items;
-};
+}
 
