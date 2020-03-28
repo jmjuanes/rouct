@@ -60,3 +60,38 @@ export function splitPath (pathString) {
     return items;
 }
 
+//Parse the query string part of the path
+export function parseQueryString (str) {
+    if (typeof str !== "string") {
+        return {}; 
+    }
+    //Remove the first ?
+    if (str.charAt(0) === "?") {
+        str = str.substr(1);
+    }
+    //Initialize the output query object
+    let query = {};
+    str.trim().split("&").forEach(function (item) {
+        //Check for empty string
+        if (item.trim() === "") {
+            return; 
+        }
+        let items = item.trim().split("=");
+        let itemKey = unescape(items[0]);
+        let itemValue = (typeof items[1] === "string") ? unescape(items[1]) : "";
+        //Check if value exists
+        if (typeof query[itemKey] !== "undefined") {
+            if (Array.isArray(query[itemKey]) === false) {
+                query[itemKey] = [ query[itemKey] ];
+            }
+            query[itemKey].push(itemValue);
+        }
+        else {
+            query[itemKey] = itemValue;
+        }
+    });
+    //Return parsed query object
+    return query;
+}
+
+
