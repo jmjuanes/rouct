@@ -10,7 +10,7 @@ export function createHistory () {
     let listener = null; //Initialize listener
     //Trigger change listeners
     let triggerChangeListener = function (newPath) {
-        if (state.listener !== null) {
+        if (listener !== null) {
             return listener(newPath);
         }
     };
