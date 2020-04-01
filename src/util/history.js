@@ -30,7 +30,7 @@ export function createHistory () {
         },
         "getCurrentPath": getCurrentPath,
         "push": function (newPath) {
-            newPath = paths.addLeadingSlash(newPath); //Add leading slash to the path
+            newPath = addLeadingSlash(newPath); //Add leading slash to the path
             window.history.pushState({}, null, newPath); //Add to the history
             return triggerChangeListener(newPath);
         },
