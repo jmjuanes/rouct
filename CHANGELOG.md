@@ -1,3 +1,8 @@
+## v0.3.1 (2020-04-02)
+
+- Fixed minor bug in history management.
+- Fixed documentation examples.
+
 
 ## v0.3.0 (2020-03-28)
 
