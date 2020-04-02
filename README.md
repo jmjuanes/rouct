@@ -32,7 +32,7 @@ There is an example of a simple website using `rouct` with the **hashbang** rout
 
 ```jsx
 import React from "react";
-import * as Rouct from "rouct";
+import Rouct from "rouct";
 
 // Main component
 class App extends React.Component {
