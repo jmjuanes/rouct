@@ -39,19 +39,19 @@ class App extends React.Component {
     render() {
         return (
             <ul>
-                <li onClick={() => Rouct.redirectHashbang("/"); }>Home</li>
-                <li onClick={() => Rouct.redirectHashbang("/products"); }>Products</li>
-                <li onClick={() => Rouct.redirectHashbang("/about"); }>About</li>
+                <li onClick={() => Rouct.redirect("/"); }>Home</li>
+                <li onClick={() => Rouct.redirect("/products"); }>Products</li>
+                <li onClick={() => Rouct.redirect("/about"); }>About</li>
             </ul>
             <hr/>
-            <Rouct.HashbangRouter>
+            <Rouct.Router routing={Rouct.HashbangRouting}>
                 <Rouct.Switch>
                     <Rouct.Route exact path="/" component={HomePage}/>
                     <Rouct.Route path="/products" component={ProductsPage}/>
                     <Rouct.Route exact path="/about" component={AboutPage}/>
                     <Rouct.Route path="*" component={NotFound}/>
                 </Rouct.Switch>
-            </Rouct.HashbangRouter>
+            </Rouct.Router>
         );
     }
 }
@@ -74,8 +74,8 @@ class ProductsPage extends React.Component {
         return (
             <h2>Products</h2>
             <ul>
-                <li onClick={() => Rouct.redirectHashbang("/products/product1"); }>Product 1</li>
-                <li onClick={() => Rouct.redirectHashbang("/products/product2"); }>Product 2</li>
+                <li onClick={() => Rouct.redirect("/products/product1"); }>Product 1</li>
+                <li onClick={() => Rouct.redirect("/products/product2"); }>Product 2</li>
             </ul>
             <Rouct.Route exact path="/products" component={EmptyProductPage}/>
             <Rouct.Route exact path="/products/:product" component={DetailProductPage}/>
@@ -119,26 +119,16 @@ class NotFound extends React.Component {
 
 ### Rouct.Router
 
-The base component that is used by the router navigation strategies. Typically you should use `HashbangRouter` instead. Only use this component if you are going to implement your own navigation strategy.
+The base routing component. You should only use one `<Rouct.Router>` component in your application.
 
 This component accepts the following props:
 
-- `location`: a `string` with the current location. The `Router` component will propague this location its `Route` and `Switch` children components.
+- `rouging`: one of the routing methods provided by Rouct (`Rouct.HashbangRouting` or `Rouct.BrowserRouting`). The router component will save the selected method and use it for the redirect function.
 
 ```jsx
-class App extends React.Component {
-    constructor(super) {
-        super(props);
-        this.state = {location: "/"};
-    }
-    
-    render() {
-        return (
-            <Rouct.Router location={this.state.location}>
-                <Rouct.Route path="/" component={Home}/>
-            </Rouct.Router>
-    }
-}
+<Rouct.Router routing={BrowserRouting}>
+    <Rouct.Route path="/" component={Home}/>
+</Rouct.Router>
 ```
 
 ### Rouct.Switch
@@ -226,38 +216,18 @@ let homeProps = {
 | `/one/two`    | `/one/two`   | No               | Yes      |
 
 
-### Browser History routing
+### Rouct.recirect(url)
 
-The **browser history** routing strategy is based on the HTML5 history API (`history.pushState` and `popstate` event listener). 
-
-#### Rouct.BrowserRouter
-
-A `Rouct.Router` component that is based on the HTML5 history API and listens to changes in the URL and propagates the new URL to any children of the type `Rouct.Switch` and `Rouct.Route`. 
-
-```jsx
-class App extends React.Component {
-    render() {
-        return (
-            <Rouct.BrowserRouter> 
-                {/* Place here your children components */}
-            </Rouct.BrowserRouter>
-        );
-    }
-}
-```
-
-#### Rouct.redirectBrowser(url)
-
-Use this function to change the URL with the provided path using `history.pushState`.
+Use this function to change the URL with the provided path. This function uses the routing method provided in the `<Rouct.Router>` component.
 
 ```jsx
 class Menu extends React.Component {
     render() {
         return (
             <div className="menu">
-                <a onClick={() => Rouct.redirectBrowser("/");}>Home</a>
-                <a onClick={() => Rouct.redirectBrowser("/about");}>About</a>
-                <a onClick={() => Rouct.redirectBrowser("/portfolio");}>Portfolio</a>
+                <a onClick={() => Rouct.redirect("/");}>Home</a>
+                <a onClick={() => Rouct.redirect("/about");}>About</a>
+                <a onClick={() => Rouct.redirect("/portfolio");}>Portfolio</a>
             </div>
         );
     }
@@ -265,7 +235,23 @@ class Menu extends React.Component {
 ```
 
 
-### Hashbang routing
+### Rouct.BrowserRouting
+
+The **browser history** routing strategy is based on the HTML5 history API (`history.pushState` and `popstate` event listener). 
+
+```jsx
+class App extends React.Component {
+    render() {
+        return (
+            <Rouct.Router routing={Rouct.BrowserRouting}> 
+                {/* Place here your children components */}
+            </Rouct.Router>
+        );
+    }
+}
+```
+
+### Rouct.HashbangRouting
 
 The **hashbang** routing strategy adds an exclamation mark after the hash to indicate that the hash is used for routing. A tipically url with a *hashbang* looks like: 
 
@@ -273,44 +259,8 @@ The **hashbang** routing strategy adds an exclamation mark after the hash to ind
 http://example.com/#!/about/contact
 ```
 
-Using this strategy is guaranteed to work in browsers that do not support `history.pushState` (of course, IE9 and).
+Using this strategy is guaranteed to work in browsers that do not support `history.pushState` (of course, IE9 and older versions).
 
-#### Rouct.HashbangRouter
-
-A `Rouct.Router` component that listens to changes in the hash portion of your URL and propagates the new URL to any children of the type `Rouct.Switch` and `Rouct.Route`.
-
-```jsx
-class App extends React.Component {
-    render() {
-        return (
-            <Rouct.HashbangRouter> 
-                {/* Place here your children components */}
-            </Rouct.HashbangRouter>
-        );
-    }
-}
-```
-
-Note that you should user only one `Rouct.HashbangRouter` component in your application to avoid unexpected behavior.
-
-
-#### Rouct.redirectHashbang(url)
-
-Use this function to change the hash segment with the provided path. This function automatically adds the exclamation mark to the path after the hash.  
-
-```jsx
-class Menu extends React.Component {
-    render() {
-        return (
-            <div className="menu">
-                <a onClick={() => Rouct.redirectHashbang("/");}>Home</a>
-                <a onClick={() => Rouct.redirectHashbang("/about");}>About</a>
-                <a onClick={() => Rouct.redirectHashbang("/portfolio");}>Portfolio</a>
-            </div>
-        );
-    }
-}
-```
 
 
 ## License
