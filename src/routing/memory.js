@@ -5,30 +5,29 @@ let getCurrentBrowserPath = function () {
     return addLeadingSlash(window.location.pathname + window.location.search + window.location.hash);
 };
 
-//Browser history routing manager
-export class BrowserRouting {
+//Memory routing manager
+export class MemoryRouting {
     constructor(listener) {
-        this.type = "browser"; //Save routing type
+        this.type = "memory"; //Save routing type
+        this.path = "/"; //Initialize path
         this.listener = listener;
     }
     //Get the current path
     getCurrentPath() {
-        return getCurrentBrowserPath();
+        return this.path;
     }
     //Mount the listener
     mount() {
-        let self = this;
-        window.addEventListener("popstate", self.listener, false);
+        return null;//Nothing to do
     }
-    //Component will unmount listener
+    //Unmount the listener
     unmount() {
-        let self = this;
-        window.removeEventListener("popstate", self.listener, false);
+        return null;//Nothing to do
     }
     //Redirect to the provided url
     redirect(newPath) {
         let self = this;
-        window.history.pushState({}, null, addLeadingSlash(newPath)); //Add to the history
+        this.path = addLeadingSlash(newPath); //Save new path
         //Terrible hack to automatically call the listener with the new path
         return setTimeout(function () {
             return self.listener(); //Call the listener manually
