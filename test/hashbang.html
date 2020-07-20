@@ -1,7 +1,7 @@
 <!-- Import modules -->
 <script type="text/javascript" src="../node_modules/react/umd/react.development.js"></script>
 <script type="text/javascript" src="../node_modules/react-dom/umd/react-dom.development.js"></script>
-<script type="text/javascript" src="../umd/rouct.js"></script>
+<script type="text/javascript" src="../dist/rouct.umd.js"></script>
 <!-- App container -->
 <div id="app"></div>
 <!-- App code -->
@@ -10,7 +10,7 @@
     //Helper to create a link to the provied path
     let createLink = function (name, to, index) {
         let clickListener = function () {
-            return Rouct.redirectHashbang(to);
+            return Rouct.redirect(to);
         };
         return h("div", {key: index, onClick: clickListener}, name);
     }; 
@@ -33,7 +33,7 @@
             //Render a single soute
             let singleRoute = h(Rouct.Route, {path: "/section1", component: SingleRoute, props: {}});
             //Render the hashbang router
-            return h(Rouct.HashbangRouter, {}, links, dispatcher, singleRoute);
+            return h(Rouct.Router, {"routing": Rouct.HashbangRouting}, links, dispatcher, singleRoute);
         }
     }
     //Home component
