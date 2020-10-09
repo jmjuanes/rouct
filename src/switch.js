@@ -22,12 +22,20 @@ export function Switch (props) {
             //Check if the current location matches the child path
             let result = match(value.pathname, child.props.path, child.props.exact);
             if (result.matches === true) {
-                element = React.createElement(child.props.component, Object.assign({}, child.props.props, {
-                    "request": Object.assign({}, value, {
-                        "params": result.params
-                    }),
-                    "key": (props.reset === true) ? value.pathname : undefined
-                }));
+                let request = Object.assign({}, value, {
+                    "params": result.params
+                });
+                //Check for render function in route component --> generate calling this function
+                if (typeof child.props.render === "function") {
+                    element = child.props.render(request); //Build calling the render
+                }
+                //Other value --> build from component
+                else {
+                    element = React.createElement(child.props.component, Object.assign({}, child.props.props, {
+                        "request": request,
+                        "key": (props.reset === true) ? value.pathname : undefined
+                    }));
+                }
                 matchFound = true; //Stop looking for route
             }
         });
