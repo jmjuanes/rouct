@@ -126,7 +126,7 @@ This component accepts the following props:
 - `rouging`: one of the routing methods provided by Rouct (`Rouct.HashbangRouting` or `Rouct.BrowserRouting`). The router component will save the selected method and use it for the redirect function.
 
 ```jsx
-<Rouct.Router routing={BrowserRouting}>
+<Rouct.Router routing={Rouct.BrowserRouting}>
     <Rouct.Route path="/" component={Home}/>
 </Rouct.Router>
 ```
@@ -201,6 +201,17 @@ let homeProps = {
 };
 <Rouct.Route path="/" component={HomePage} props={homeProps}/>
 ```
+
+##### `render`
+
+A function that will be called when the route matches. This prop can not be uswd with the `component` property.
+
+```jsx
+<Rouct.Route path="/" render={function () {
+    return "Hello world";
+}} />
+```
+
 
 ##### `exact`
 
