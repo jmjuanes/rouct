@@ -12,11 +12,14 @@ export function Route (props) {
         //Check if the path of the route matches the current location
         let result = match(value.pathname, props.path, props.exact);
         if (result.matches === true) {
+            let request = Object.assign({}, value, {"params": result.params});
+            //Check for render function --> call this function instead
+            if (typeof props.render === "function") {
+                return props.render(request);
+            }
             //Render the component provided in the route props
             return React.createElement(props.component, Object.assign({}, props.props, {
-                "request": Object.assign({}, value, {
-                    "params": result.params
-                })
+                "request": request
             }));
         }
         //If does not match, return null
@@ -29,6 +32,7 @@ Route.defaultProps = {
     "path": "*", 
     "component": null, 
     "props": {},
+    "render": null,
     "exact": false
 };
 
