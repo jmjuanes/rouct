@@ -1,6 +1,5 @@
 import React from "react";
 import {getContextConsumer} from "./context.js";
-import {Context} from "./context.js";
 import {match} from "./util/match.js";
 
 //Switch class
