@@ -1,10 +1,5 @@
 import {addLeadingSlash} from "../util/paths.js";
 
-//Get the current path with a leading slash
-let getCurrentBrowserPath = function () {
-    return addLeadingSlash(window.location.pathname + window.location.search + window.location.hash);
-};
-
 //Memory routing manager
 export class MemoryRouting {
     constructor(listener) {
