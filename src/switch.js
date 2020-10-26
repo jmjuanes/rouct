@@ -1,10 +1,11 @@
 import React from "react";
+import {getContextConsumer} from "./context.js";
 import {Context} from "./context.js";
 import {match} from "./util/match.js";
 
 //Switch class
 export function Switch (props) {
-    return React.createElement(Context.Consumer, {}, function (value) {
+    return React.createElement(getContextConsumer(props.context), {}, function (value) {
         let matchFound = false;
         let element = null;
         //Iterate over all chilren elements
@@ -45,6 +46,7 @@ export function Switch (props) {
 }
 
 Switch.defaultProps = {
+    "context": "default",
     "reset": false //Reset route when path changes
 };
 

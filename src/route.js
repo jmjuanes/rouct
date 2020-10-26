@@ -1,5 +1,5 @@
 import React from "react";
-import {Context} from "./context.js";
+import {getContextConsumer} from "./context.js";
 import {match} from "./util/match.js";
 
 //Export route component
@@ -8,7 +8,7 @@ export function Route (props) {
         return null; //No component to render
     }
     //Render the consumer component
-    return React.createElement(Context.Consumer, {}, function (value) {
+    return React.createElement(getContextConsumer(props.context), {}, function (value) {
         //Check if the path of the route matches the current location
         let result = match(value.pathname, props.path, props.exact);
         if (result.matches === true) {
@@ -29,6 +29,7 @@ export function Route (props) {
 
 //Route default props
 Route.defaultProps = {
+    "context": "default",
     "path": "*", 
     "component": null, 
     "props": {},
