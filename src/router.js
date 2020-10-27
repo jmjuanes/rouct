@@ -27,8 +27,8 @@ export class Router extends React.Component {
         //currentRouting.mount(); //Mount the routing
         getContext(this.props.context).routing.mount(); //Mount the routing
     }
-    //Component did unmount --> remove listeners from routing
-    componentDidUnmount() {
+    //Component will unmount --> remove listeners from routing
+    componentWillUnmount() {
         //currentRouting.unmount(); //Unmount
         getContext(this.props.context).routing.unmount();
         removeContext(this.props.context); //Remove context
