@@ -4,7 +4,7 @@ import {match} from "./util/match.js";
 
 //Export route component
 export function Route (props) {
-    if (props.component === null) {
+    if (props.component === null && typeof props.render !== "function") {
         return null; //No component to render
     }
     //Render the consumer component
