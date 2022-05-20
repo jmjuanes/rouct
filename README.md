@@ -2,10 +2,9 @@
 
 > Micro client-side routing component for React.
 
-[![npm](https://img.shields.io/npm/v/rouct.svg?style=flat-square)](https://www.npmjs.com/package/rouct)
-[![npm](https://img.shields.io/npm/dt/rouct.svg?style=flat-square)](https://www.npmjs.com/package/rouct)
-[![npm](https://img.shields.io/npm/l/rouct.svg?style=flat-square)](https://github.com/jmjuanes/rouct)
-[![pr](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)]()
+[![npm](https://img.shields.io/npm/v/rouct.svg)](https://www.npmjs.com/package/rouct)
+[![npm](https://img.shields.io/npm/dt/rouct.svg)](https://www.npmjs.com/package/rouct)
+[![npm](https://img.shields.io/npm/l/rouct.svg)](https://github.com/jmjuanes/rouct)
 
 
 **Rouct** is a micro client-side routing component for building **single page applications** (SPA for short) with [React](https://www.reactjs.org). 
