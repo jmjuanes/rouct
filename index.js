@@ -2,7 +2,10 @@ import React from "react";
 
 // Rouct context
 const Context = React.createContext("/");
-const routing = {current: null}; // Current routing instance
+const routing = {
+    pathPrefix: "/",
+    current: null,
+};
 
 // Unescape a character
 const unescape = str => window.decodeURIComponent(str.replace(/\+/g, " "));
@@ -11,8 +14,8 @@ const unescape = str => window.decodeURIComponent(str.replace(/\+/g, " "));
 const addLeadingSlash = str => str.charAt(0) === "/" ? str : "/" + str;
 
 // Parse a string path
-const parsePath = str => {
-    const parsedPath = addLeadingSlash(str || "/");
+const parsePath = (str = "/", prefix = "/") => {
+    const parsedPath = addLeadingSlash(str.startsWith(prefix) ? str.replace(prefix, "") : str);
     let pathname = parsedPath;
     let search = "";
     let hash = "";
@@ -27,6 +30,8 @@ const parsePath = str => {
         pathname = pathname.substr(0, searchIndex);
     }
     return {
+        originalPath: str,
+        prefix: prefix,
         path: parsedPath,
         pathname: pathname,
         search: search,
@@ -37,6 +42,19 @@ const parsePath = str => {
 
 // Split a path by slashes
 const splitPath = str => str.trim().split("/").filter(s => !!s);
+
+// Join two paths
+const joinPath = (base, ...segments) => {
+    const paths = base.split("/").filter(p => p.length > 0);
+    (segments || []).forEach(s => {
+        s && typeof s === "string" && paths.push(s.split("/").filter(p => !!p && p !== "." && p !== "..").join("/"));
+    });
+    // Check if last segment is an object
+    const last = (segments || []).length > 0 && segments[segments.length - 1];
+    const query = (last && typeof last === "object") ? "?" + new URLSearchParams(last).toString() : "";
+    // Return the joined paths
+    return "/" + paths.join("/") + query;
+};
 
 // Parse the query string part of the path
 const parseQueryString = str => {
@@ -96,7 +114,7 @@ const match = (current, pattern, exact) => {
     };
 };
 
-//Memory routing manager
+// Memory routing manager
 const MemoryRouting = {
     path: "/",
     eventName: null,
@@ -123,7 +141,7 @@ const HashbangRouting = {
     },
 };
 
-//Browser history routing manager
+// Browser history routing manager
 const BrowserRouting = {
     eventName: "popstate",
     listener: null,
@@ -209,7 +227,6 @@ const Route = props => {
     });
 }
 
-// Route default props
 Route.defaultProps = {
     path: "*", 
     component: null, 
@@ -222,6 +239,7 @@ Route.defaultProps = {
 const Router = props => {
     const [path, setPath] = React.useState(() => {
         routing.current = props.routing || BrowserRouting;
+        routing.pathPrefix = props.pathPrefix || "/";
         return routing.current.getCurrentPath(); // Get initial path
     });
     // On mout router component
@@ -237,19 +255,20 @@ const Router = props => {
         }
     }, []);
     // Generate request object and render provider component
-    const request = parsePath(path || "/");
+    const request = parsePath(path, routing.pathPrefix);
     return React.createElement(Context.Provider, {value: request}, props.children);
 };
 
-//Default router props
 Router.defaultProps = {
-    "context": "default",
-    "routing": null
+    pathPrefix: "/",
+    routing: null
 };
 
 // Tiny redirect handler
 const redirect = newPath => {
-    return routing.current && routing.current.redirect(newPath || "/");
+    if (routing.current) {
+        return routing.current.redirect(joinPath(routing.pathPrefix, newPath || "/"));
+    }
 };
 
 const Rouct = {
@@ -257,11 +276,9 @@ const Rouct = {
     Router,
     Switch,
     redirect,
-    //Routing methods
     HashbangRouting,
     BrowserRouting,
     MemoryRouting,
 };
 
-//Export rouct
 export default Rouct;

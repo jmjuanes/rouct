@@ -13,10 +13,14 @@
 
 ## Installation 
 
-Use `npm` to install the package:
+Use **npm** or **yarn** to install the package:
 
 ```bash
+## Install using NPM:
 $ npm install --save rouct
+
+## Install using YARN:
+$ yarn add rouct
 ```
 
 You can now import `rouct` in your ES6 module:
@@ -113,7 +117,6 @@ class NotFound extends React.Component {
 }
 ```
 
-
 ## API 
 
 ### Rouct.Router
@@ -123,6 +126,7 @@ The base routing component. You should only use one `<Rouct.Router>` component i
 This component accepts the following props:
 
 - `rouging`: one of the routing methods provided by Rouct (`Rouct.HashbangRouting` or `Rouct.BrowserRouting`). The router component will save the selected method and use it for the redirect function.
+- `pathPrefix`: a prefix added to all paths on the site. Default is `/`.
 
 ```jsx
 <Rouct.Router routing={Rouct.BrowserRouting}>
