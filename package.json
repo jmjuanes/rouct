@@ -1,13 +1,17 @@
 {
     "name": "rouct",
     "description": "Micro client-side router component for React",
-    "version": "0.5.0",
+    "version": "0.6.0",
     "license": "MIT",
-    "author": "Josemi Juanes <josemijuanes@gmail.com>",
+    "author": "Josemi Juanes <hello@josemi.xyz>",
     "repository": "https://github.com/jmjuanes/rouct",
     "bugs": "https://github.com/jmjuanes/rouct/issues",
     "type": "module",
     "main": "index.js",
+    "exports": {
+        ".": "./index.js",
+        "./package.json": "./package.json"
+    },
     "files": [
         "index.js",
         "LICENSE",
@@ -20,7 +24,7 @@
         "route",
         "routes"
     ],
-    "devDependencies": {
+    "peerDependencies": {
         "react": "^18.1.0",
         "react-dom": "^18.1.0"
     }
